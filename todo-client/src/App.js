@@ -1,12 +1,12 @@
 import React from 'react';
-import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
-import OneTodo from './components/OneTodo';
-import {Routes, Route} from 'react-router-dom';
+import {AddTodo} from './components/AddTodo';
+import {TodoList} from './components/TodoList';
+import {Routes,Route} from 'react-router-dom';
+import {OneTodo} from './components/OneTodo';
 
 function App() {
   return (
-    <div style={{width:'79%',margin:'auto'}}>
+    <div>
       <Routes>
         <Route path="/" element={<><AddTodo/>
       <TodoList/></>}/>
