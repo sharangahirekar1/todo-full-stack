@@ -1,4 +1,5 @@
-const express = require('express');
+const express = require("express");
+
 const Todo = require("../schemas/todo.schema");
 
 const todoRoute = express.Router();
@@ -9,30 +10,25 @@ todoRoute.get("/",async(req,res)=>{
     res.send(todos);
 });
 todoRoute.get("/:id",async(req,res)=>{
-    const id = req.params.id;
-    const todo = await Todo.find({_id:id});
+    const todo = await Todo.find({_id:req.params.id});
     res.send(todo);
 });
 todoRoute.post("/",async(req,res)=>{
-    const body = req.body;
-    const todo = new Todo(body);
-    await todo.save();
-    res.sendStatus(201);
+    const todo = new Todo(req.body);
+    try{
+        await todo.save();
+        res.send(todo);
+    }catch(err){res.sendStatus(401);console.log(err)}
 });
 todoRoute.delete("/:id",async(req,res)=>{
-    const id = req.params.id;
     try{
-        await Todo.deleteOne({_id:id});
+        await Todo.findByIdAndDelete(req.params.id);
         res.sendStatus(204);
     }catch(err){res.sendStatus(401)}
-    
 });
 todoRoute.patch("/:id",async(req,res)=>{
-    const id = req.params.id;
-    const body = req.body;
     try{
-        await Todo.findByIdAndUpdate(id,req.body)
-        res.sendStatus(202);
+        await Todo.findByIdAndUpdate(req.params.id,req.body);
     }catch(err){res.sendStatus(401)}
 });
 

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const todoSchema = new mongoose.Schema({
-    title:{type:String,minLength:1,maxLength:50,required:true},
-    content:{type:String,minLength:5,maxLength:200,required:true},
+    title:{type:String,required:true,minLength:1,maxLength:50},
+    content:{type:String,required:true,minLength:5,maxLength:250},
     isCompleted:{type:Boolean,required:true}
 })
 
