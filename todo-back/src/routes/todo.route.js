@@ -29,6 +29,7 @@ todoRoute.delete("/:id",async(req,res)=>{
 todoRoute.patch("/:id",async(req,res)=>{
     try{
         await Todo.findByIdAndUpdate(req.params.id,req.body);
+        res.sendStatus(200)
     }catch(err){res.sendStatus(401)}
 });
 

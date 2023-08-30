@@ -119,7 +119,7 @@ export const patchData = (id,body)=>(dispatch)=>{
         headers:{
             'Content-Type':'application/json'
         }
-    }).then((res)=>dispatch(todoPatchSuccess(id))).catch((err)=>dispatch(todoPatchError(err)))
+    }).then((res)=>{console.log(res,'from patchdata');dispatch(todoPatchSuccess(id))}).catch((err)=>dispatch(todoPatchError(err)))
 }
 
 export const ping = () =>{

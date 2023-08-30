@@ -5,16 +5,12 @@ import {getData, deleteData, patchData} from '../store/action';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
-import { getAll } from '../utils/indexedDB';
 
 const TodoList = ()=>{
     let list =  useSelector((state)=>state.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.isLoading);
-    if(!navigator.onLine){
-        list = getAll();
-    }
     const handleDelete = (id)=>{
         dispatch(deleteData(id));
     }
@@ -33,7 +29,9 @@ const TodoList = ()=>{
                         <DeleteOutlineIcon/>
                     </Button>
                     <ListItemButton onClick={()=>navigate(`/${t._id}`)}>
-                        <ListItemText>{t.title && t.title}</ListItemText>
+                        <ListItemText sx={{
+                            textDecoration:t.isCompleted? "line-through":"none"
+                        }}>{t.title && t.title}</ListItemText>
                     </ListItemButton>
                     <Checkbox onChange={()=>handleComplete(t._id)} checked={t.isCompleted}/>
                 </ListItem>)}
