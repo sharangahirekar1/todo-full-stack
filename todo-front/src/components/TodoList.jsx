@@ -19,7 +19,7 @@ const TodoList = ()=>{
     }
     React.useEffect(()=>{
         dispatch(getData());
-    },[])
+    },[dispatch])
     return (
         <Box>
             {loading && <LinearProgress/>}
