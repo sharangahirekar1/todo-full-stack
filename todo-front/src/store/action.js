@@ -122,6 +122,13 @@ export const patchData = (id,body)=>(dispatch)=>{
     }).then((res)=>dispatch(todoPatchSuccess(id))).catch((err)=>dispatch(todoPatchError(err)))
 }
 
+export const ping = () =>{
+    return axios({
+        method:'GET',
+        url:'http://localhost:8111'
+    })
+}
+
 
 
 

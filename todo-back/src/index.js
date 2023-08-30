@@ -2,9 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const todoSlice = require("./routes/todo.route");
 const userSlice = require("./routes/user.route");
+const cors = require("cors")
 
 const app = express();
 app.use(express.json()) // if not validation will fail
+app.use(cors())
 app.use("/todos",todoSlice);
 app.use("/users",userSlice);
 
