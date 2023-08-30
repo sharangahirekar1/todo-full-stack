@@ -5,8 +5,10 @@ import {Routes, Route} from 'react-router-dom';
 import NavBar from './components/NavBar';
 import OneTodo from './components/OneTodo';
 import Login from './components/Login';
+import { create_indexedDB } from './utils/indexedDB';
 
 function App() {
+  create_indexedDB('todos',1);
   return (
     <div>
       <NavBar/>

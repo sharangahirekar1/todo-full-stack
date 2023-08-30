@@ -5,13 +5,16 @@ import {getData, deleteData, patchData} from '../store/action';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
+import { getAll } from '../utils/indexedDB';
 
 const TodoList = ()=>{
-    const list = useSelector((state)=>state.todo);
+    let list =  useSelector((state)=>state.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.isLoading);
-
+    if(!navigator.onLine){
+        list = getAll();
+    }
     const handleDelete = (id)=>{
         dispatch(deleteData(id));
     }
