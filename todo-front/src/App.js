@@ -6,11 +6,13 @@ import NavBar from './components/NavBar';
 import OneTodo from './components/OneTodo';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
   return (
     <div style={{
-      background:"#ADD8E6"
+      background:location.pathname == "/"?"white":"#ADD8E6"
     }}>
       <NavBar/>
       <div style={{
