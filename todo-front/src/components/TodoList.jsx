@@ -14,7 +14,8 @@ const TodoList = ()=>{
     const handleDelete = (id)=>{
         dispatch(deleteData(id));
     }
-    const handleComplete = (id)=>{
+    const handleComplete = (ev,id)=>{
+        console.log(ev)
         dispatch(patchData(id,{isCompleted:true}))
     }
     React.useEffect(()=>{
@@ -33,7 +34,7 @@ const TodoList = ()=>{
                             textDecoration:t.isCompleted? "line-through":"none"
                         }}>{t.title && t.title}</ListItemText>
                     </ListItemButton>
-                    <Checkbox onChange={()=>handleComplete(t._id)} checked={t.isCompleted}/>
+                    <Checkbox onChange={(ev)=>handleComplete(ev,t._id)} checked={t.isCompleted}/>
                 </ListItem>)}
             </List>}
         </Box>

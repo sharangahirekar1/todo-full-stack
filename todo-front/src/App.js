@@ -8,9 +8,14 @@ import Login from './components/Login';
 
 function App() {
   return (
-    <div>
+    <div style={{
+      background:"#ADD8E6"
+    }}>
       <NavBar/>
-      <div style={{marginTop:"100px"}}>
+      <div style={{
+        paddingTop:"100px",
+        height:"84vh"
+      }}>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/:id" element={<OneTodo/>}/>
