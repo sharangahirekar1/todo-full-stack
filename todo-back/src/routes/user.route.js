@@ -16,7 +16,10 @@ userRoute.get("/:id",async(req,res)=>{
     const user = await User.find({_id:req.params.id});
     res.send(user);
 }) // particular user
-userRoute.post("/",async(req,res)=>{
+userRoute.post("/login",async(req,res)=>{
+    res.send("");
+})
+userRoute.post("/signup",async(req,res)=>{
     const user = new User(req.body);
     try{
         await user.save();

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, List, ListItem, ListItemButton, ListItemText, Checkbox} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {getData, deleteData, patchData} from '../store/action';
+import {actions} from '../store/action';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -12,13 +12,14 @@ const TodoList = ()=>{
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.isLoading);
     const handleDelete = (id)=>{
-        dispatch(deleteData(id));
+        dispatch(actions.deleteData(id));
     }
-    const handleComplete = (id)=>{
-        dispatch(patchData(id,{isCompleted:true}))
+    const handleComplete = (ev,id)=>{
+        console.log(ev)
+        dispatch(actions.patchData(id,{isCompleted:true}))
     }
     React.useEffect(()=>{
-        dispatch(getData());
+        dispatch(actions.getData());
     },[dispatch])
     return (
         <Box>
@@ -33,7 +34,7 @@ const TodoList = ()=>{
                             textDecoration:t.isCompleted? "line-through":"none"
                         }}>{t.title && t.title}</ListItemText>
                     </ListItemButton>
-                    <Checkbox onChange={()=>handleComplete(t._id)} checked={t.isCompleted}/>
+                    <Checkbox onChange={(ev)=>handleComplete(ev,t._id)} checked={t.isCompleted}/>
                 </ListItem>)}
             </List>}
         </Box>
