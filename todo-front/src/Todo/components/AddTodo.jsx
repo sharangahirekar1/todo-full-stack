@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Fab, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch, useSelector} from 'react-redux';
-import {actions} from '../store/action'; 
+import {actions} from '../state/actions'; 
 
 const AddTodo = ()=>{
     const [todo,setTodo] = React.useState({});

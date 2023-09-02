@@ -1,5 +1,5 @@
-export const types = {
-
+export const todoTypes = {
+    
  TODO_REQUEST: 'todo/request',
 
  TODO_GET_SUCCESS: 'todo/get/success',
@@ -13,12 +13,5 @@ export const types = {
 
  TODO_PATCH_SUCCESS: 'todo/patch/success',
  TODO_PATCH_ERROR: 'todo/patch/error',
-
- USER_LOGIN_REQUEST: 'user/login/request',
- USER_LOGIN_SUCCESS: 'user/login/success',
- USER_LOGIN_ERROR: 'user/login/error',
-
- USER_SIGNUP_REQUEST: 'user/signup/request',
- USER_SIGNUP_SUCCESS: 'user/signup/success',
- USER_SIGNUP_ERROR: 'user/signup/error'
+ 
 }

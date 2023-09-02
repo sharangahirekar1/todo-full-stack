@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
-import { actions } from '../store/action';
+import { actions } from '../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 
 

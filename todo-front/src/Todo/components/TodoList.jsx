@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, List, ListItem, ListItemButton, ListItemText, Checkbox} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {actions} from '../store/action';
+import {actions} from '../state/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';

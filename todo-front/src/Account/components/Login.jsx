@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../store/action';
+import { actions } from '../../store/action';
 import "./../styles/loader.css"
 
 const Login = ()=>{
