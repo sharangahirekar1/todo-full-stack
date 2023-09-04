@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
   return (
     <div style={{
-      background:location.pathname == "/"?"white":"#ADD8E6"
+      background:location.pathname === "/"?"white":"#ADD8E6"
     }}>
       <NavBar/>
       <div style={{

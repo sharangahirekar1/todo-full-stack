@@ -16,12 +16,12 @@ const Login = ()=>{
     const dispatch = useDispatch()
 
     const handleChange = (ev)=>{
-        if (ev.target.name == "username"){
+        if (ev.target.name === "username"){
             if(validator.isAlphanumeric(ev.target.value) && ev.target.value?.length >= 6){
                 setLogin({...login,username:ev.target.value})
             }else setLogin({...login,username:""})
         }
-        else if(ev.target.name == "password"){
+        else if(ev.target.name === "password"){
             if(ev.target.value.length > 10){
                 setLogin({...login,password:ev.target.value})
             }else setLogin({...login,password:""})
@@ -51,9 +51,9 @@ const Login = ()=>{
                 <div style={{
                     textAlign:"center"
                 }}>LOGIN</div>
-                <TextField label="Username" error={login.username == ""} name="username" onChange={handleChange}/>
-                <TextField label="Password" error={login.password == ""} name="password" onChange={handleChange}/>
-                <Button variant="contained" onClick={handleLogin} disabled={login.username == "" || login.password == "" ? true:false}>Login</Button>
+                <TextField label="Username" error={login.username === ""} name="username" onChange={handleChange}/>
+                <TextField label="Password" error={login.password === ""} name="password" onChange={handleChange}/>
+                <Button variant="contained" onClick={handleLogin} disabled={login.username === "" || login.password === "" ? true:false}>Login</Button>
                 <div style={{
                     textAlign:"center"
                 }}>Not a member? <Link to="/signup">Create an account</Link> </div>
