@@ -1,43 +1,43 @@
 import axios from 'axios';
-import {types} from './types';
+import {userTypes} from './types';
 
 
 const userLoginRequest = ()=>{
     return {
-        type: types.USER_LOGIN_REQUEST
+        type: userTypes.USER_LOGIN_REQUEST
     }
 }
 
 const userLoginSuccess = (loginData)=>{
     return {
-        type: types.USER_LOGIN_SUCCESS,
+        type: userTypes.USER_LOGIN_SUCCESS,
         payload: loginData
     }
 }
 
 const userLoginError = (error)=>{
     return {
-        type: types.USER_LOGIN_ERROR,
+        type: userTypes.USER_LOGIN_ERROR,
         payload: error,
     }
 }
 
 const userSignupRequest = ()=>{
     return {
-        type: types.USER_SIGNUP_REQUEST
+        type: userTypes.USER_SIGNUP_REQUEST
     }
 }
 
 const userSignupSuccess = (signupData)=>{
     return {
-        type: types.USER_SIGNUP_SUCCESS,
+        type: userTypes.USER_SIGNUP_SUCCESS,
         payload: signupData
     }
 }
 
 const userSignupError = (error)=>{
     return {
-        type: types.USER_SIGNUP_ERROR,
+        type: userTypes.USER_SIGNUP_ERROR,
         payload: error
     }
 }

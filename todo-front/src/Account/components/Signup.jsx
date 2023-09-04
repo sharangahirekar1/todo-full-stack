@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
-import { actions } from '../../store/action';
+import { userActions } from '../state/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -15,7 +15,7 @@ const Signup = (props)=>{
         confirm_password:null
     })
     const dispatch = useDispatch();
-    const loading = useSelector((state)=>state.isLoading);
+    const loading = useSelector((state)=>state.user.isLoading);
 
     const handleChange = (ev)=>{
         if(ev.target.name == "email"){
@@ -40,7 +40,7 @@ const Signup = (props)=>{
         }
     }
     const handleSignup = (ev)=>{
-        dispatch(actions.signupApi(signup))
+        dispatch(userActions.signupApi(signup))
     }
     return (
         <div>

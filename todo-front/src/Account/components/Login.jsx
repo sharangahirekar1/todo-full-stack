@@ -3,8 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../../store/action';
-import "./../styles/loader.css"
+import { userActions } from '../state/actions';
+import "./../../styles/loader.css"
 
 const Login = ()=>{
 
@@ -12,7 +12,7 @@ const Login = ()=>{
         username:null,
         password:null
     })
-    const loading = useSelector((state)=>state.isLoading);
+    const loading = useSelector((state)=>state.user.isLoading);
     const dispatch = useDispatch()
 
     const handleChange = (ev)=>{
@@ -28,7 +28,7 @@ const Login = ()=>{
         }
     }
     const handleLogin = ()=>{
-        dispatch(actions.loginApi(login));
+        dispatch(userActions.loginApi(login));
     }
     return (
         <div style={{

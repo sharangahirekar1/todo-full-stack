@@ -1,62 +1,62 @@
 import axios from 'axios';
-import {types} from './types';
+import {todoTypes} from './types';
 
 //---------------------- action creators -----------------------------
 
 const todoRequest = ()=>{
     return {
-        type: types.TODO_REQUEST
+        type: todoTypes.TODO_REQUEST
     }
 }
 
 const todoGetSuccess = (dataArray)=>{
     return {
-        type: types.TODO_GET_SUCCESS,
+        type: todoTypes.TODO_GET_SUCCESS,
         payload:dataArray
     }
 }
 const todoGetError = (err)=>{
     return {
-        type: types.TODO_GET_ERROR,
+        type: todoTypes.TODO_GET_ERROR,
         payload:err
     }
 }
 
 const todoPostSuccess = (data)=>{
     return {
-        type: types.TODO_POST_SUCCESS,
+        type: todoTypes.TODO_POST_SUCCESS,
         payload:data
     }
 }
 const todoPostError = (err)=>{
     return {
-        type: types.TODO_POST_ERROR,
+        type: todoTypes.TODO_POST_ERROR,
         payload:err
     }
 }
 
 const todoDeleteSuccess = (id)=>{
     return {
-        type: types.TODO_DELETE_SUCCESS,
+        type: todoTypes.TODO_DELETE_SUCCESS,
         payload:id
     }
 }
 const todoDeleteError = (err)=>{
     return {
-        type: types.TODO_DELETE_ERROR,
+        type: todoTypes.TODO_DELETE_ERROR,
         payload:err
     }
 }
 
 const todoPatchSuccess = (id)=>{
     return {
-        type: types.TODO_PATCH_SUCCESS,
+        type: todoTypes.TODO_PATCH_SUCCESS,
         payload:id
     }
 }
 const todoPatchError = (err)=>{
     return {
-        type: types.TODO_PATCH_ERROR,
+        type: todoTypes.TODO_PATCH_ERROR,
         payload:err
     }
 }

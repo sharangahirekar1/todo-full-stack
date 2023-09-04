@@ -1,25 +1,25 @@
 import React from 'react';
 import {Box, Button, List, ListItem, ListItemButton, ListItemText, Checkbox} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {actions} from '../state/actions';
+import {todosActions} from '../state/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const TodoList = ()=>{
-    let list =  useSelector((state)=>state.todo);
+    let list =  useSelector((state)=>state.todo.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const loading = useSelector((state)=>state.isLoading);
+    const loading = useSelector((state)=>state.todo.isLoading);
     const handleDelete = (id)=>{
-        dispatch(actions.deleteData(id));
+        dispatch(todosActions.deleteData(id));
     }
     const handleComplete = (ev,id)=>{
         console.log(ev)
-        dispatch(actions.patchData(id,{isCompleted:true}))
+        dispatch(todosActions.patchData(id,{isCompleted:true}))
     }
     React.useEffect(()=>{
-        dispatch(actions.getData());
+        dispatch(todosActions.getData());
     },[dispatch])
     return (
         <Box>
