@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 .vercel
+todo-front\.vercel
+.gitignore
+todo-front\.gitignore
 
 # testing
 /coverage
