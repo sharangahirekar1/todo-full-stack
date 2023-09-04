@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 
 const OneTodo = ()=>{
     const {id} = useParams();
-    const list = useSelector((state)=>state.todo);
+    const list = useSelector((state)=>state.todo.todo);
     const todo = list.find((t)=>t._id === id);
     return (
         <div>

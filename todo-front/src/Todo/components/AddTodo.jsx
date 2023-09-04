@@ -2,19 +2,19 @@ import React from 'react';
 import {Box, Fab, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch, useSelector} from 'react-redux';
-import {actions} from '../store/action'; 
+import {todosActions} from '../state/actions'; 
 
 const AddTodo = ()=>{
     const [todo,setTodo] = React.useState({});
     const dispatch = useDispatch();
-    const loading = useSelector((state)=>state.isLoading);
+    const loading = useSelector((state)=>state.todo.isLoading);
     const handleChange = (e)=>{
         const {name,value} = e.target;
         setTodo({...todo,isCompleted:false,[name]:value});
     }
     const handleSubmit = ()=>{
         console.log(todo)
-        dispatch(actions.postData(todo))
+        dispatch(todosActions.postData(todo))
     }
     return (
         <Box sx={{
