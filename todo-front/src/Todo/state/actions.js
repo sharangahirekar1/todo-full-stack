@@ -68,7 +68,7 @@ const getData = ()=>(dispatch)=>{
 
     return axios({
         method:'GET',
-        url:"http://localhost:8111/todos/",
+        url:"https://todo-backend-xhl5.onrender.com/todos/",
     }).then((res)=>dispatch(todoGetSuccess(res.data))).catch((err)=>dispatch(todoGetError(err)))
 }
 
@@ -77,7 +77,7 @@ const postData = (data)=>(dispatch)=>{
 
     return axios({
         method:'POST',
-        url:"http://localhost:8111/todos",
+        url:"https://todo-backend-xhl5.onrender.com/todos",
         data:JSON.stringify(data),
         headers:{
             "Content-Type":"application/json"
@@ -91,7 +91,7 @@ const deleteData = (id)=>(dispatch)=>{
     try{
         return axios({
             method:'DELETE',
-            url:'http://localhost:8111/todos/'+id,
+            url:'https://todo-backend-xhl5.onrender.com/todos/'+id,
         }).then((res)=>dispatch(todoDeleteSuccess(id))).catch((err)=>dispatch(todoDeleteError(err)))
     }catch(err){console.log(err)}
 }
@@ -101,7 +101,7 @@ const patchData = (id,body)=>(dispatch)=>{
 
     return axios({
         method:'PATCH',
-        url:'http://localhost:8111/todos/'+id,
+        url:'https://todo-backend-xhl5.onrender.com/todos/'+id,
         data:JSON.stringify(body),
         headers:{
             'Content-Type':'application/json'
