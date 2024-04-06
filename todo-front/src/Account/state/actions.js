@@ -29,9 +29,10 @@ const userSignupRequest = ()=>{
 }
 
 const userSignupSuccess = (signupData)=>{
+    console.log("paylaod ", signupData.data);
     return {
         type: userTypes.USER_SIGNUP_SUCCESS,
-        payload: signupData
+        payload: signupData.data
     }
 }
 
@@ -58,7 +59,10 @@ const signupApi = (data)=>(dispatch)=>{
         headers:{
             "Content-Type":"application/json"
         }
-    }).then((res)=>dispatch(userSignupSuccess(data))).catch((err)=>dispatch(userSignupError(err)))
+    }).then((res)=>{
+        console.log(res, 'res in action');
+        dispatch(userSignupSuccess(res));
+    }).catch((err)=>dispatch(userSignupError(err)))
 }
 
 const loginApi = (data)=>(dispatch)=>{

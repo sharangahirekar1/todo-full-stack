@@ -1,10 +1,21 @@
-import { Button, TextField } from '@mui/material';
+import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import { userActions } from '../state/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 const Signup = (props)=>{
 
@@ -14,8 +25,18 @@ const Signup = (props)=>{
         password:null,
         confirm_password:null
     })
+    const [ open, setOpen ] = React.useState(false);
     const dispatch = useDispatch();
     const loading = useSelector((state)=>state.user.isLoading);
+    const response = useSelector((state)=>state.user.response);
+
+    console.log(response, typeof response, 'response in state');
+
+    React.useEffect(()=>{
+        if(typeof response === "string" && response === "User exists!" ){
+            setOpen(true);
+        }
+    },[response])
 
     const handleChange = (ev)=>{
         if(ev.target.name == "email"){
@@ -69,6 +90,22 @@ const Signup = (props)=>{
                     textAlign:"center"
                 }}>Already a member? <Link to="/login">Go to Login</Link> </div>
             </div>}
+
+            <Modal
+                open={open}
+                onClose={()=>setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Exception Occurred
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                </Typography>
+                </Box>
+            </Modal>
         </div>
     )
 }

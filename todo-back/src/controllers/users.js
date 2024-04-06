@@ -8,9 +8,9 @@ controls.signup = async (req,res) => {
     const email = req.body.email;
     const userExists = await User.find({email});
     if(userExists){
-        res.send("User exists!");
+        return res.send("User exists!");
     }
-    
+
     const user = new User(req.body);
     await user.save();
     res.send(user);
