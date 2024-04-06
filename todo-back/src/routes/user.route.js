@@ -1,4 +1,5 @@
 const express = require("express");
+const userControls = require("./../controllers/users");
 
 const User = require("../schemas/user.schema");
 
@@ -30,11 +31,12 @@ userRoute.post("/login",async(req,res)=>{
     catch(err){res.sendStatus(401)}
 })
 userRoute.post("/signup",async(req,res)=>{
-    const user = new User(req.body);
     try{
-        await user.save();
-        res.send(user);
-    }catch(err){res.sendStatus(401)}
+        await userControls.signup(req,res);
+    }catch(err){
+        console.log(err,'error ');
+        res.sendStatus(401);
+    }
 })   // sign up
 userRoute.delete("/:id",async(req,res)=>{
     try {
