@@ -82,5 +82,6 @@ const loginApi = (data)=>(dispatch)=>{
 export const userActions = {
     signupApi,
     loginApi,
+    userSignupSuccess,
 }
 
