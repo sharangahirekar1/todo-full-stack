@@ -5,17 +5,31 @@ import {todosActions} from '../state/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
+import Snackbar from '@mui/material/Snackbar';
 
 const TodoList = ()=>{
     let list =  useSelector((state)=>state.todo.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.todo.isLoading);
+    const [snackbar, setSnackbar] = React.useState({
+        open: false,
+        msg: ""
+    })
+    const { open, msg} = snackbar;
+    const handleOpenSnackbar = (msg) => {
+        setSnackbar({open: true, msg})
+    }
+    const handleCloseSnackbar = (msg) => {
+        setSnackbar({open: false, msg: ""})
+    }
     const handleDelete = (id)=>{
+        setSnackbar({open: true, msg: "Deleted the todo"});
         dispatch(todosActions.deleteData(id));
     }
     const handleComplete = (ev,id)=>{
-        console.log(ev)
+        console.log(ev);
+        setSnackbar({open: true, msg: "Marked as Complete!"});
         dispatch(todosActions.patchData(id,{isCompleted:true}))
     }
     React.useEffect(()=>{
@@ -37,6 +51,12 @@ const TodoList = ()=>{
                     <Checkbox onChange={(ev)=>handleComplete(ev,t._id)} checked={t.isCompleted}/>
                 </ListItem>)}
             </List>}
+            <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}
+                open={open}
+                onClose={handleCloseSnackbar}
+                message={msg}
+            />
         </Box>
     )
 }
