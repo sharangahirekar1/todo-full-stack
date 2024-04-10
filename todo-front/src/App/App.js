@@ -36,10 +36,14 @@ export {App};
 
 
 const Home = (props)=>{
+  const state = React.useState({
+      open: false,
+      msg: ""
+  })
   return (
     <div>
-      <AddTodo/>
-      <TodoList/>
+      <AddTodo state={state}/>
+      <TodoList state={state}/>
     </div>
   )
 }

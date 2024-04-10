@@ -7,15 +7,12 @@ import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 import Snackbar from '@mui/material/Snackbar';
 
-const TodoList = ()=>{
+const TodoList = (props)=>{
+    const [snackbar, setSnackbar] = props.state;
     let list =  useSelector((state)=>state.todo.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.todo.isLoading);
-    const [snackbar, setSnackbar] = React.useState({
-        open: false,
-        msg: ""
-    })
     const { open, msg} = snackbar;
     const handleOpenSnackbar = (msg) => {
         setSnackbar({open: true, msg})

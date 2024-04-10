@@ -3,8 +3,11 @@ import {Box, Fab, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch, useSelector} from 'react-redux';
 import {todosActions} from '../state/actions'; 
+import Snackbar from '@mui/material/Snackbar';
 
-const AddTodo = ()=>{
+const AddTodo = (props)=>{
+    const [snackbar, setSnackbar] = props.state;
+    const { open, msg} = snackbar;
     const [todo,setTodo] = React.useState({});
     const dispatch = useDispatch();
     const loading = useSelector((state)=>state.todo.isLoading);
@@ -13,8 +16,13 @@ const AddTodo = ()=>{
         setTodo({...todo,isCompleted:false,[name]:value});
     }
     const handleSubmit = ()=>{
-        console.log(todo)
+        console.log(todo);
+        setSnackbar({open: true, msg: "Added Todo"});
         dispatch(todosActions.postData(todo))
+    }
+
+    const handleCloseSnackbar = (msg) => {
+        setSnackbar({open: false, msg: ""})
     }
     return (
         <Box sx={{
@@ -30,6 +38,12 @@ const AddTodo = ()=>{
             <Fab color="primary" onClick={handleSubmit} disabled={loading}>
                 <AddIcon />
             </Fab>
+            <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}
+                open={open}
+                onClose={handleCloseSnackbar}
+                message={msg}
+            />
         </Box>
     )
 }
