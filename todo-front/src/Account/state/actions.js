@@ -29,7 +29,6 @@ const userSignupRequest = ()=>{
 }
 
 const userSignupSuccess = (signupData)=>{
-    console.log("paylaod ", signupData.data);
     return {
         type: userTypes.USER_SIGNUP_SUCCESS,
         payload: signupData.data
@@ -60,7 +59,6 @@ const signupApi = (data)=>(dispatch)=>{
             "Content-Type":"application/json"
         }
     }).then((res)=>{
-        console.log(res, 'res in action');
         dispatch(userSignupSuccess(res));
     }).catch((err)=>dispatch(userSignupError(err)))
 }

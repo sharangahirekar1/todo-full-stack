@@ -25,7 +25,6 @@ const TodoList = (props)=>{
         dispatch(todosActions.deleteData(id));
     }
     const handleComplete = (ev,id)=>{
-        console.log(ev);
         setSnackbar({open: true, msg: "Marked as Complete!"});
         dispatch(todosActions.patchData(id,{isCompleted:true}))
     }

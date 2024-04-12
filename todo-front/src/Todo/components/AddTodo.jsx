@@ -16,7 +16,6 @@ const AddTodo = (props)=>{
         setTodo({...todo,isCompleted:false,[name]:value});
     }
     const handleSubmit = ()=>{
-        console.log(todo);
         setSnackbar({open: true, msg: "Added Todo"});
         dispatch(todosActions.postData(todo))
     }

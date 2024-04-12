@@ -30,8 +30,6 @@ const Signup = (props)=>{
     const loading = useSelector((state)=>state.user.isLoading);
     const response = useSelector((state)=>state.user.response);
 
-    console.log(response, typeof response, 'response in state');
-
     React.useEffect(()=>{
         if(typeof response === "string" && response === "User exists!" ){
             setOpen(true);
