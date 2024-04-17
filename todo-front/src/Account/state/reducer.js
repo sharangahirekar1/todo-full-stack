@@ -32,6 +32,28 @@ const userReducer = (state=initState,action)=>{
                 isError: true
             }
         }
+        case userTypes.USER_LOGIN_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                isError: false
+            }
+        }
+        case userTypes.USER_LOGIN_SUCCESS: {
+            return {
+                ...state,
+                login: action.payload,
+                isLoading: false,
+                isError: false
+            }
+        }
+        case userTypes.USER_LOGIN_ERROR: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+        }
         default: return state
     }
 }

@@ -32,7 +32,20 @@ controls.signup = async (req,res) => {
 
     const user = new User(userData);
     await user.save();
-    res.send(user);
+    res.send("User created successfully");
+}
+
+controls.login = async (req,res) => {
+    const userdata = req.body
+    console.log(userdata, 'login userdata');
+    const hash = createHash(userdata.password, salt);
+    console.log('hash', hash);
+
+    const user = await User.find({email:userdata.email, hash});
+    console.log(user,' user login')
+    if(user.length === 1){
+        res.send({username:user[0].username})
+    }else res.send("User doesn't exist");
 }
 
 module.exports = controls;

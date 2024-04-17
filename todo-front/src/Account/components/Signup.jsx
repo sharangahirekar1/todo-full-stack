@@ -1,6 +1,6 @@
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { userActions } from '../state/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ const style = {
   };
 
 const Signup = (props)=>{
-
+    const navigate = useNavigate();
     const [ signup, setSignup ] = React.useState({
         email:null,
         username:null,
@@ -33,6 +33,11 @@ const Signup = (props)=>{
     React.useEffect(()=>{
         if(typeof response === "string" && response === "User exists!" ){
             setOpen(true);
+        }
+        if(typeof response === "string" && response === "User created successfully"){
+            setOpen(true);
+            navigate("/login");
+
         }
     },[response])
 
@@ -97,7 +102,7 @@ const Signup = (props)=>{
             >
                 <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Error !
+                    Message
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     {response}

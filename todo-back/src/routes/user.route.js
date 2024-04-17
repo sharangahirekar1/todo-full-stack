@@ -18,17 +18,13 @@ userRoute.get("/:id",async(req,res)=>{
     res.send(user);
 }) // particular user
 userRoute.post("/login",async(req,res)=>{
-    const userdata = req.body
     try{
-        if(userdata){
-            const user = await User.find({username:userdata.username,password:userdata.password})
-            if(user){
-                res.send({username:user.username})
-            }else res.sendStatus(204)
-        }
-        else res.sendStatus(401)
+        await userControls.login(req,res);
     }
-    catch(err){res.sendStatus(401)}
+    catch(err){
+        console.log(err, 'login error');
+        res.sendStatus(401)
+    }
 })
 userRoute.post("/signup",async(req,res)=>{
     try{

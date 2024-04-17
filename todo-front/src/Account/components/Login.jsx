@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../state/actions';
@@ -9,27 +9,32 @@ import "./../../styles/loader.css"
 const Login = ()=>{
 
     const [ login, setLogin ] = React.useState({
-        username:null,
+        email:null,
         password:null
     })
+    const navigate = useNavigate();
     const loading = useSelector((state)=>state.user.isLoading);
     const dispatch = useDispatch()
+    const res = useSelector((state)=>state.user.login);
+    console.log(res,' login use selector data');
 
     const handleChange = (ev)=>{
-        if (ev.target.name == "username"){
-            if(validator.isAlphanumeric(ev.target.value) && ev.target.value?.length >= 6){
-                setLogin({...login,username:ev.target.value})
-            }else setLogin({...login,username:""})
+        if (ev.target.name == "email"){
+            setLogin({...login,email:ev.target.value})
         }
         else if(ev.target.name == "password"){
-            if(ev.target.value.length > 10){
-                setLogin({...login,password:ev.target.value})
-            }else setLogin({...login,password:""})
+            setLogin({...login,password:ev.target.value})
         }
     }
     const handleLogin = ()=>{
         dispatch(userActions.loginApi(login));
     }
+    React.useEffect(()=>{
+        if(res && typeof res === "object" && res.username){
+            localStorage.setItem("username", res.username);
+            navigate("/");
+        }
+    },[res])
     return (
         <div style={{
         }}>
@@ -51,9 +56,9 @@ const Login = ()=>{
                 <div style={{
                     textAlign:"center"
                 }}>LOGIN</div>
-                <TextField label="Username" error={login.username == ""} name="username" onChange={handleChange}/>
-                <TextField label="Password" error={login.password == ""} name="password" onChange={handleChange}/>
-                <Button variant="contained" onClick={handleLogin} disabled={login.username == "" || login.password == "" ? true:false}>Login</Button>
+                <TextField type='email' label="Email" error={login.email == ""} name="email" onChange={handleChange}/>
+                <TextField type='password' label="Password" error={login.password == ""} name="password" onChange={handleChange}/>
+                <Button variant="contained" onClick={handleLogin} >Login</Button>
                 <div style={{
                     textAlign:"center"
                 }}>Not a member? <Link to="/signup">Create an account</Link> </div>

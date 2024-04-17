@@ -11,7 +11,7 @@ const userLoginRequest = ()=>{
 const userLoginSuccess = (loginData)=>{
     return {
         type: userTypes.USER_LOGIN_SUCCESS,
-        payload: loginData
+        payload: loginData.data
     }
 }
 
@@ -73,7 +73,7 @@ const loginApi = (data)=>(dispatch)=>{
         headers:{
             "Content-Type":"application/json"
         }
-    }).then((res)=>dispatch(userLoginSuccess(data))).catch((err)=>dispatch(userLoginError(err)))
+    }).then((res)=>dispatch(userLoginSuccess(res))).catch((err)=>dispatch(userLoginError(err)))
 }
 
 
