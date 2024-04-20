@@ -44,7 +44,7 @@ controls.login = async (req,res) => {
     const user = await User.find({email:userdata.email, hash});
     console.log(user,' user login')
     if(user.length === 1){
-        res.send({username:user[0].username})
+        res.send({username:user[0].username, userId: user[0]._id})
     }else res.send("User doesn't exist");
 }
 
