@@ -6,7 +6,9 @@ const todoRoute = express.Router();
 todoRoute.use(express.json());
 
 todoRoute.get("/",async(req,res)=>{
-    const todos = await Todo.find({});
+    const userId = req.query.userId;
+    console.log(userId);
+    const todos = await Todo.find({userId});
     res.send(todos);
 });
 todoRoute.get("/:id",async(req,res)=>{

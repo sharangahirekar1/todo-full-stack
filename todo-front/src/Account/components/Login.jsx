@@ -31,7 +31,7 @@ const Login = ()=>{
     }
     React.useEffect(()=>{
         if(res && typeof res === "object" && res.username){
-            localStorage.setItem("username", res.username);
+            localStorage.setItem("user", JSON.stringify(res));
             navigate("/");
         }
     },[res])

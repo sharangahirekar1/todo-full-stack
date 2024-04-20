@@ -29,7 +29,8 @@ const TodoList = (props)=>{
         dispatch(todosActions.patchData(id,{isCompleted:true}))
     }
     React.useEffect(()=>{
-        dispatch(todosActions.getData());
+        const user = JSON.parse(localStorage.getItem("user"));
+        dispatch(todosActions.getData(user.userId));
     },[dispatch])
     return (
         <Box>

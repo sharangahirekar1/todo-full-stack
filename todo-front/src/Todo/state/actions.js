@@ -63,12 +63,12 @@ const todoPatchError = (err)=>{
 
 //---------------------- actual actions ------------------------------
 
-const getData = ()=>(dispatch)=>{
+const getData = (userId)=>(dispatch)=>{
     dispatch(todoRequest());
 
     return axios({
         method:'GET',
-        url:"http://localhost:8111/todos/",
+        url:"http://localhost:8111/todos?userId="+ userId,
     }).then((res)=>dispatch(todoGetSuccess(res.data))).catch((err)=>dispatch(todoGetError(err)))
 }
 

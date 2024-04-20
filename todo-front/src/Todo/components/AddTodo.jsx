@@ -11,12 +11,14 @@ const AddTodo = (props)=>{
     const [todo,setTodo] = React.useState({});
     const dispatch = useDispatch();
     const loading = useSelector((state)=>state.todo.isLoading);
+    const user = JSON.parse(localStorage.getItem("user"));
     const handleChange = (e)=>{
         const {name,value} = e.target;
         setTodo({...todo,isCompleted:false,[name]:value});
     }
     const handleSubmit = ()=>{
         setSnackbar({open: true, msg: "Added Todo"});
+        todo.userId = user.userId;
         dispatch(todosActions.postData(todo))
     }
 
