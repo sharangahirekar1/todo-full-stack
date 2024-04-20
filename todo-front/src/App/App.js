@@ -8,6 +8,7 @@ import Login from '../Account/components/Login';
 import Signup from '../Account/components/Signup';
 import { useLocation } from 'react-router-dom';
 import Blog from '../Blog/Blog';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const location = useLocation();
@@ -21,8 +22,8 @@ function App() {
         height:"84vh"
       }}>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/:id" element={<OneTodo/>}/>
+        <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
+        <Route path="/:id" element={<PrivateRoute><OneTodo/></PrivateRoute>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/blog" element={<Blog/>}/>
