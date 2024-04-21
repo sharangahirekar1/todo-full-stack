@@ -61,6 +61,9 @@ const Login = ()=>{
                 <Button variant="contained" onClick={handleLogin} >Login</Button>
                 <div style={{
                     textAlign:"center"
+                }}> <Link to="/forgotPassword">Forgot password?</Link> </div>
+                <div style={{
+                    textAlign:"center"
                 }}>Not a member? <Link to="/signup">Create an account</Link> </div>
             </div>}
         </div>

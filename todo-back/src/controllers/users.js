@@ -48,4 +48,14 @@ controls.login = async (req,res) => {
     }else res.send("User doesn't exist");
 }
 
+controls.forgotPassword = async(req,res) => {
+    const newPassword = req.body.password;
+    const email = req.body.email;
+    const hash = createHash(newPassword, salt);
+
+    const user = await User.findOneAndUpdate(email,{hash});
+    res.send("Successfully updated the password");
+
+}
+
 module.exports = controls;

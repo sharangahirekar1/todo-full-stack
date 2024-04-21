@@ -26,6 +26,17 @@ userRoute.post("/login",async(req,res)=>{
         res.sendStatus(401)
     }
 })
+
+userRoute.post("/forgotPassword", async(req,res)=>{
+    try {
+        await userControls.forgotPassword(req,res);
+    }
+    catch(err){
+        console.log(err,"forgotpassword error");
+    }
+
+})
+
 userRoute.post("/signup",async(req,res)=>{
     try{
         await userControls.signup(req,res);
