@@ -13,10 +13,12 @@ userRoute.get("/",async(req,res)=>{
 
     
 }); //query search by name, email, age, gender
+
 userRoute.get("/:id",async(req,res)=>{
     const user = await User.find({_id:req.params.id});
     res.send(user);
 }) // particular user
+
 userRoute.post("/login",async(req,res)=>{
     try{
         await userControls.login(req,res);

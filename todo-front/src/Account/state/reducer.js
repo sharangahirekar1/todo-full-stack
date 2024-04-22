@@ -54,6 +54,12 @@ const userReducer = (state=initState,action)=>{
                 isError: true
             }
         }
+        case userTypes.USER_LOGOUT: {
+            return {
+                ...state,
+                login: null
+            }
+        }
         default: return state
     }
 }

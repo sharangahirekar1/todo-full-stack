@@ -8,4 +8,6 @@ export const userTypes = {
     USER_SIGNUP_SUCCESS: 'user/signup/success',
     USER_SIGNUP_ERROR: 'user/signup/error',
 
+    USER_LOGOUT: 'user/logout'
+
    }

@@ -4,6 +4,8 @@ import {Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, T
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userTypes } from '../../Account/state/types';
 
 const pages = ['Todo','Login','Blog'];
 const setting = ['Profile','Account','Dashboard','Logout'];
@@ -12,6 +14,7 @@ const NavBar = ()=>{
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleOpenNavMenu = (e)=>{
         setAnchorElNav(e.currentTarget);
@@ -22,7 +25,10 @@ const NavBar = ()=>{
     const handleCloseNavMenu = ()=>{
         setAnchorElNav(null);
     }
-    const handleCloseUserMenu = ()=>{
+    const handleCloseUserMenu = (s)=>{
+        if(s === "Logout") {
+            dispatch({type: userTypes.USER_LOGOUT});
+        }
         setAnchorElUser(null);
     }
     return (
@@ -119,7 +125,7 @@ const NavBar = ()=>{
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {setting.map((s)=><MenuItem key={s} onClick={handleCloseUserMenu}>
+                                {setting.map((s)=><MenuItem key={s} onClick={()=>handleCloseUserMenu(s)}>
                                     <Typography>{s}</Typography>
                                 </MenuItem>)}
                             </Menu>
