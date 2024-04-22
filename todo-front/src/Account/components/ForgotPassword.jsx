@@ -33,7 +33,7 @@ const ForgotPassword = () => {
         }).then((res)=>setResponse(res.data))
     }
     React.useEffect(()=>{
-        if(response && response === "Successfully updated the password"){
+        if(response && response.message === "Successfully updated the password"){
             navigate("/login")
         }
     },[response])

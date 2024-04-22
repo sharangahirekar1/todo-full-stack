@@ -51,10 +51,11 @@ controls.login = async (req,res) => {
 controls.forgotPassword = async(req,res) => {
     const newPassword = req.body.password;
     const email = req.body.email;
+    console.log(email,'email from forgot password');
     const hash = createHash(newPassword, salt);
 
-    const user = await User.findOneAndUpdate(email,{hash});
-    res.send("Successfully updated the password");
+    const user = await User.findOneAndUpdate({email},{hash});
+    res.send({message: "Successfully updated the password",user});
 
 }
 
