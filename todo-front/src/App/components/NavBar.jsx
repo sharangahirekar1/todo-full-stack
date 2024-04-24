@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userTypes } from '../../Account/state/types';
 
-const pages = ['Todo','Login','Blog'];
+const pages = ['Todo','Blog'];
 const setting = ['Profile','Account','Dashboard','Logout'];
 
 const NavBar = ()=>{

@@ -15,12 +15,14 @@ function App() {
   const location = useLocation();
   return (
     <div style={{
-      background:location.pathname == "/"?"white":"#ADD8E6"
+      backgroundColor:location.pathname == "/"?"white":"#ADD8E6",
+      width: '100%'
     }}>
       <NavBar/>
       <div style={{
         paddingTop:"100px",
-        height:"84vh"
+        height:"84vh",
+        widht: "100%"
       }}>
       <Routes>
         <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>

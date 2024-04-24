@@ -27,16 +27,19 @@ const AddTodo = (props)=>{
     }
     return (
         <Box sx={{
-            display: "flex",
+            display: {xs: "block",md: "flex"},
             justifyContent:"space-around",
         }}>
             <TextField name="title" label="Add Title" sx={{
                 width:"40ch"
             }} onChange={handleChange}/>
-            <TextField name="content" label="Add Description" sx={{
-                width:"100ch"
+            <TextField name="content" multiline rows={{xs:4,md:1}} label="Add Description" sx={{
+                width: {xs: "40ch", md: "100ch"},
+                marginTop: {xs: "15px", md: "0px"}
             }} onChange={handleChange}/>
-            <Fab color="primary" onClick={handleSubmit} disabled={loading}>
+            <Fab color="primary" onClick={handleSubmit} disabled={loading} sx={{
+                marginTop: {xs: "15px", md: "0px"}
+            }}>
                 <AddIcon />
             </Fab>
             <Snackbar
