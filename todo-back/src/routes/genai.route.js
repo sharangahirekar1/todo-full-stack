@@ -1,6 +1,8 @@
 const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAIRoute = express.Router();
+const dotenv = require("dotenv");
+dotenv.config();
 
 genAIRoute.use(express.json());
 
