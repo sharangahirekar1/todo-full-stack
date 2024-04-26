@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 import Blog from '../Blog/Blog';
 import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from '../Account/components/ForgotPassword';
+import GenAi from '../GenAI/GenAi';
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
         <Route path="/:id" element={<PrivateRoute><OneTodo/></PrivateRoute>}/>
+        <Route path="/gen-ai" element={<PrivateRoute><GenAi/></PrivateRoute>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path="/signup" element={<Signup/>}/>

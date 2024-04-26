@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userTypes } from '../../Account/state/types';
 
-const pages = ['Todo','Blog'];
+const pages = ['Todo','Blog','GenAI'];
 const setting = ['Profile','Account','Dashboard','Logout'];
 
 const NavBar = ()=>{
@@ -30,6 +30,22 @@ const NavBar = ()=>{
             dispatch({type: userTypes.USER_LOGOUT});
         }
         setAnchorElUser(null);
+    }
+    const handlePages = (page) => {
+        handleCloseNavMenu();
+        switch(page) {
+            case 'Login': {
+                navigate("/login");
+                break;
+            }
+            case 'GenAI': {
+                navigate("/gen-ai");
+                break;
+            }
+            default: {
+                return
+            }
+        }
     }
     return (
         <div>
@@ -62,7 +78,7 @@ const NavBar = ()=>{
                             sx={{
                                 display:{xs:'block',md:'none'}
                           }}>
-                            {pages.map((page)=><MenuItem key={page} onClick={()=>{handleCloseNavMenu();if(page === 'Login')navigate("/login")}}>
+                            {pages.map((page)=><MenuItem key={page} onClick={()=>handlePages(page)}>
                                 <Typography>{page}</Typography>
                             </MenuItem>)}
                           </Menu>
@@ -102,6 +118,10 @@ const NavBar = ()=>{
                                         }
                                         case 'Blog':{
                                             navigate("/blog");
+                                            break;
+                                        }
+                                        case 'GenAI': {
+                                            navigate("/gen-ai");
                                             break;
                                         }
                                         default: {}
