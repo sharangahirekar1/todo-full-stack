@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
+import {marked} from 'marked';
 
 const GenAi = () => {
     const [prompt, setPrompt] = useState("");
@@ -25,6 +26,7 @@ const GenAi = () => {
         const response = await apiCall();
         setResponse(response);
         setLoading(false);
+        setPrompt("");
     }
   return [
     <Box sx={{
@@ -48,7 +50,7 @@ const GenAi = () => {
     <Skeleton animation="wave" />
      : 
     <Box>
-        {response}
+        {response !== "" && marked.parse(response)}
     </Box>}
     </>
   ]
