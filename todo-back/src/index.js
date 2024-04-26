@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const todoSlice = require("./routes/todo.route");
 const userSlice = require("./routes/user.route");
+const genaiSlice = require("./routes/genai.route");
 const cors = require("cors")
 const dotenv = require("dotenv");
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(express.json()) // if not validation will fail
 app.use(cors())
 app.use("/todos",todoSlice);
 app.use("/users",userSlice);
+app.use("/genai",genaiSlice);
 
 app.listen(8111,async()=>{
     await mongoose.connect(connStr);
