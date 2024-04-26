@@ -1,19 +1,20 @@
 import { Box, Fab, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
 
 const GenAi = () => {
-    const [prompt, setPrompt] = useEffect("");
-    const [loading, setLoading] = useEffect(false);
-    const [response, setResponse] = useEffect("");
+    const [prompt, setPrompt] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [response, setResponse] = useState("");
+    const user = JSON.parse(localStorage.getItem("user"));
     const apiCall = async () => {
         setLoading(true);
         const res = await axios({
             method: "POST",
-            url: "http://localhost:8111/genai/text2text",
-            data: prompt,
+            url: "http://localhost:8111/genai/text2text?" + "userId=" + user.userId,
+            data: {prompt},
             headers: {
                 "Content-type": 'application/json'
             }

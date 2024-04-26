@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const genaiSchema = new mongoose.Schema({
     prompt: {type: String},
     response: {type: String},
+    modelName: {type: String},
     userId: {type: mongoose.Schema.Types.ObjectId},
     created: {
         type: Date,
