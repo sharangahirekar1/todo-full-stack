@@ -11,6 +11,7 @@ import Blog from '../Blog/Blog';
 import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from '../Account/components/ForgotPassword';
 import GenAi from '../GenAI/GenAi';
+import Todo from '../Todo/Todo';
 
 function App() {
   const location = useLocation();
@@ -26,7 +27,7 @@ function App() {
         widht: "100%"
       }}>
       <Routes>
-        <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
+        <Route path="/" element={<PrivateRoute><Todo/></PrivateRoute>}/>
         <Route path="/:id" element={<PrivateRoute><OneTodo/></PrivateRoute>}/>
         <Route path="/gen-ai" element={<PrivateRoute><GenAi/></PrivateRoute>}/>
         <Route path="/login" element={<Login/>}/>
@@ -41,16 +42,3 @@ function App() {
 
 export {App};
 
-
-const Home = (props)=>{
-  const state = React.useState({
-      open: false,
-      msg: ""
-  })
-  return (
-    <div>
-      <AddTodo state={state}/>
-      <TodoList state={state}/>
-    </div>
-  )
-}

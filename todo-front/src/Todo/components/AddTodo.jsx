@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Box, Fab, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useDispatch, useSelector} from 'react-redux';
 import {todosActions} from '../state/actions'; 
 import Snackbar from '@mui/material/Snackbar';
+import { SnackBarContext } from '../../Common/Contexts/Snackbar';
 
 const AddTodo = (props)=>{
-    const [snackbar, setSnackbar] = props.state;
+    const {snackbar, setSnackbar} = useContext(SnackBarContext);
     const { open, msg} = snackbar;
     const [todo,setTodo] = React.useState({});
     const dispatch = useDispatch();
@@ -22,9 +23,6 @@ const AddTodo = (props)=>{
         dispatch(todosActions.postData(todo))
     }
 
-    const handleCloseSnackbar = (msg) => {
-        setSnackbar({open: false, msg: ""})
-    }
     return (
         <Box sx={{
             display: {xs: "block",md: "flex"},
@@ -42,12 +40,6 @@ const AddTodo = (props)=>{
             }}>
                 <AddIcon />
             </Fab>
-            <Snackbar
-                anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}
-                open={open}
-                onClose={handleCloseSnackbar}
-                message={msg}
-            />
         </Box>
     )
 }

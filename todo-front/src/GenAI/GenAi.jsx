@@ -1,11 +1,13 @@
-import { Box, Fab, TextField } from '@mui/material'
+import { Box, Fab, Input, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
 import {marked} from 'marked';
+import { SnackBarContext } from '../Common/Contexts/Snackbar';
 
 const GenAi = () => {
+    const {snackbar, setSnackbar} = useContext(SnackBarContext);
     const [prompt, setPrompt] = useState("");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
@@ -23,6 +25,13 @@ const GenAi = () => {
         return res.data.response;
     }
     const handleSubmit = async ()=> {
+        if(prompt === "") {
+            setSnackbar({
+                open: true,
+                msg: "Empty Prompt!?!"
+            })
+            return
+        }
         const response = await apiCall();
         setResponse(response);
         setLoading(false);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Box, Button, List, ListItem, ListItemButton, ListItemText, Checkbox} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {todosActions} from '../state/actions';
@@ -6,9 +6,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 import Snackbar from '@mui/material/Snackbar';
+import { SnackBarContext } from '../../Common/Contexts/Snackbar';
 
 const TodoList = (props)=>{
-    const [snackbar, setSnackbar] = props.state;
+    const {snackbar, setSnackbar} = useContext(SnackBarContext);
     let list =  useSelector((state)=>state.todo.todo);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -48,12 +49,12 @@ const TodoList = (props)=>{
                     <Checkbox onChange={(ev)=>handleComplete(ev,t._id)} checked={t.isCompleted}/>
                 </ListItem>)}
             </List>}
-            <Snackbar
+            {/* <Snackbar
                 anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}
                 open={open}
                 onClose={handleCloseSnackbar}
                 message={msg}
-            />
+            /> */}
         </Box>
     )
 }

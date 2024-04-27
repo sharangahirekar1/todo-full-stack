@@ -4,12 +4,15 @@ import {App} from './App';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import SnackBarProvider from './Common/Contexts/Snackbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <Provider store={store}>
   <BrowserRouter>
-    <App />
+    <SnackBarProvider>
+      <App />
+    </SnackBarProvider>
   </BrowserRouter>
 </Provider>
 );
