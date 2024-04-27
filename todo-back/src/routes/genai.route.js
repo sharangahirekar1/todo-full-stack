@@ -13,6 +13,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 genAIRoute.post("/text2text", async (req,res)=>{
     try {
+        console.log(req.body, "req . body")
         const userId = req.query.userId;
         const prompt = req.body.prompt;
         const modelName = "gemini-pro"

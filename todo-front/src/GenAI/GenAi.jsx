@@ -8,7 +8,7 @@ import { SnackBarContext } from '../Common/Contexts/Snackbar';
 
 const GenAi = () => {
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
-    const [prompt, setPrompt] = useState("");
+    const [promptData, setPromptData] = useState({prompt: "", files: null});
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const user = JSON.parse(localStorage.getItem("user"));
@@ -17,7 +17,7 @@ const GenAi = () => {
         const res = await axios({
             method: "POST",
             url: "http://localhost:8111/genai/text2text?" + "userId=" + user.userId,
-            data: {prompt},
+            data: promptData,
             headers: {
                 "Content-type": 'application/json'
             }
@@ -25,17 +25,17 @@ const GenAi = () => {
         return res.data.response;
     }
     const handleSubmit = async ()=> {
-        if(prompt === "") {
+        if(promptData.prompt === "") {
             setSnackbar({
                 open: true,
-                msg: "Empty Prompt!?!"
+                msg: "Cannot fetch for empty prompt!"
             })
             return
         }
         const response = await apiCall();
         setResponse(response);
         setLoading(false);
-        setPrompt("");
+        setPromptData({...promptData, prompt: ""});
     }
   return [
     <Box sx={{
@@ -47,12 +47,17 @@ const GenAi = () => {
     }}>
         <TextField name="title" label="Prompt" sx={{
             width:"140ch"
-        }} multiline maxRows={2} value={prompt} onChange={(ev)=>setPrompt(ev.target.value)}/>
+        }} multiline maxRows={2} value={promptData.prompt} onChange={(ev)=>setPromptData({...promptData, prompt: ev.target.value})}/>
         <Fab color="primary" onClick={handleSubmit}  sx={{
             marginTop: {xs: "15px", md: "0px"}
         }}>
             <AddIcon />
         </Fab>
+        <Input type='file' onChange={(ev)=>{
+            const files = ev.target.files;
+            console.log(files,'files from Input tag upload');
+            setPromptData({...promptData, files});
+        }}/>
     </Box>,
     <>
     {loading ?
