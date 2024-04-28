@@ -72,7 +72,7 @@ const GenAi = () => {
     <Skeleton animation="wave" />
      : 
     <Box>
-        {response !== "" && `${marked.parse(response)}`}
+        <div dangerouslySetInnerHTML={{__html:marked.parse(response) }}></div>
     </Box>}
     </>
   ]
