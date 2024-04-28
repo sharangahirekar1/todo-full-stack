@@ -39,7 +39,10 @@ genAIRoute.post("/text2text", async (req,res)=>{
         await promptLog.save();
         res.send({response: response.text()})
     }catch(err){
-        console.log("Error text2text ", err);
+        console.log("Error text2text ", err, err.message);
+        if(err.message.includes("Text not available. Response was blocked due to OTHER")) {
+            res.send({response: null, error: "Text not available. Response was blocked due to OTHER"});
+        }
     }
 })
 

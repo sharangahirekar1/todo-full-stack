@@ -22,7 +22,7 @@ const GenAi = () => {
                 "Content-type": 'application/json'
             }
         })
-        return res.data.response;
+        return res.data;
     }
     const handleSubmit = async ()=> {
         if(promptData.prompt === "") {
@@ -33,8 +33,15 @@ const GenAi = () => {
             return
         }
         const response = await apiCall();
-        setResponse(response);
+        if(response.error) {
+            setSnackbar({
+                open: true,
+                msg: response.error
+            })
+        }
+        setResponse(response.response);
         setLoading(false);
+
         setPromptData({...promptData, prompt: ""});
     }
     const toBase64 = file => new Promise((resolve, reject) => {
@@ -72,7 +79,7 @@ const GenAi = () => {
     <Skeleton animation="wave" />
      : 
     <Box>
-        <div dangerouslySetInnerHTML={{__html:marked.parse(response) }}></div>
+        {response && <div dangerouslySetInnerHTML={{__html:marked.parse(response) }}></div>}
     </Box>}
     </>
   ]
