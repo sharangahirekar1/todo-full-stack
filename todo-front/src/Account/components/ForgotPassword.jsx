@@ -12,6 +12,11 @@ const ForgotPassword = () => {
     const navigate = useNavigate();
     const [response, setResponse] = useState({})
     const handleChange = (ev) => {
+        if(ev.key === "Enter") {
+            setTimeout(()=>{
+                handleSubmit();
+            },100)
+        }
         if(ev.target.name == "email"){
                 setForgotP({...forgotP,email:ev.target.value})
         }
@@ -55,9 +60,9 @@ const ForgotPassword = () => {
                 <div style={{
                     textAlign:"center"
                 }}>FORGOT PASSWORD</div>
-                <TextField label="Email" error={forgotP.email == ""} name="email" onChange={handleChange}/>
-                <TextField label="Username" error={forgotP.username == ""} name="username" onChange={handleChange}/>
-                <TextField label="Password" error={forgotP.password == ""} name="password" onChange={handleChange}/>
+                <TextField label="Email" error={forgotP.email == ""} name="email" onKeyUpCapture={handleChange}/>
+                <TextField label="Username" error={forgotP.username == ""} name="username" onKeyUpCapture={handleChange}/>
+                <TextField label="Password" error={forgotP.password == ""} name="password" onKeyUpCapture={handleChange}/>
                 <Button variant="contained" onClick={handleSubmit} >Update Password</Button>
                 
             </div>}

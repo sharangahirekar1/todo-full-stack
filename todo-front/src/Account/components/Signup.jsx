@@ -42,6 +42,11 @@ const Signup = (props)=>{
     },[response])
 
     const handleChange = (ev)=>{
+        if(ev.key === "Enter") {
+            setTimeout(()=>{
+                handleSignup();
+            },100)
+        }
         if(ev.target.name == "email"){
             if(validator.isEmail(ev.target.value)){
                 setSignup({...signup,email:ev.target.value})
@@ -84,10 +89,10 @@ const Signup = (props)=>{
                 <div style={{
                     textAlign:"center"
                 }}>SIGNUP</div>
-                <TextField label="Email" error={signup.email == ""} name="email" onChange={handleChange}/>
-                <TextField label="Username" error={signup.username == ""} name="username" onChange={handleChange}/>
-                <TextField label="Password" error={signup.password == ""} name="password" onChange={handleChange}/>
-                <TextField label="Confirm Password" error={signup.confirm_password == ""} name="confirm_password" onChange={handleChange}/>
+                <TextField label="Email" error={signup.email == ""} name="email" onKeyUpCapture={handleChange}/>
+                <TextField label="Username" error={signup.username == ""} name="username" onKeyUpCapture={handleChange}/>
+                <TextField label="Password" error={signup.password == ""} name="password" onKeyUpCapture={handleChange}/>
+                <TextField label="Confirm Password" error={signup.confirm_password == ""} name="confirm_password" onKeyUpCapture={handleChange}/>
                 <Button variant="contained" onClick={handleSignup} disabled={signup.email == "" || signup.username == "" || signup.password == "" || signup.confirm_password == "" || signup.password != signup.confirm_password ? true:false}>Create an account</Button>
                 <div style={{
                     textAlign:"center"

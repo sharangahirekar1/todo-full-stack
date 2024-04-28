@@ -17,14 +17,19 @@ const Login = ()=>{
     const dispatch = useDispatch()
     const res = useSelector((state)=>state.user.login);
     console.log(res,' login use selector data');
-
     const handleChange = (ev)=>{
+        if(ev.key === "Enter"){
+            setTimeout(()=>{
+                handleLogin();
+            },100)
+        }
         if (ev.target.name == "email"){
             setLogin({...login,email:ev.target.value})
         }
         else if(ev.target.name == "password"){
             setLogin({...login,password:ev.target.value})
         }
+        
     }
     const handleLogin = ()=>{
         dispatch(userActions.loginApi(login));
@@ -56,8 +61,8 @@ const Login = ()=>{
                 <div style={{
                     textAlign:"center"
                 }}>LOGIN</div>
-                <TextField type='email' label="Email" error={login.email == ""} name="email" onChange={handleChange}/>
-                <TextField type='password' label="Password" error={login.password == ""} name="password" onChange={handleChange}/>
+                <TextField type='email' label="Email" error={login.email == ""} name="email" onKeyUpCapture={handleChange}/>
+                <TextField type='password' label="Password" error={login.password == ""} name="password" onKeyUpCapture={handleChange}/>
                 <Button variant="contained" onClick={handleLogin} >Login</Button>
                 <div style={{
                     textAlign:"center"
