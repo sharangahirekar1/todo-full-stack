@@ -8,7 +8,7 @@ import { SnackBarContext } from '../Common/Contexts/Snackbar';
 
 const GenAi = () => {
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
-    const [promptData, setPromptData] = useState({prompt: "", files: null});
+    const [promptData, setPromptData] = useState({prompt: "", file: null});
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const user = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +37,12 @@ const GenAi = () => {
         setLoading(false);
         setPromptData({...promptData, prompt: ""});
     }
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+    });
   return [
     <Box sx={{
         display: {xs: "block",md: "flex"},
@@ -53,10 +59,12 @@ const GenAi = () => {
         }}>
             <AddIcon />
         </Fab>
-        <Input type='file' onChange={(ev)=>{
+        <Input type='file' onChange={async (ev)=>{
             const files = ev.target.files;
             console.log(files,'files from Input tag upload');
-            setPromptData({...promptData, files});
+            const file = files[0];
+            const base64 = await toBase64(file);
+            setPromptData({...promptData, file:{base64:base64.slice(23), mimeType: file.type}});
         }}/>
     </Box>,
     <>
@@ -64,7 +72,7 @@ const GenAi = () => {
     <Skeleton animation="wave" />
      : 
     <Box>
-        {response !== "" && marked.parse(response)}
+        {response !== "" && `${marked.parse(response)}`}
     </Box>}
     </>
   ]

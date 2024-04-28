@@ -11,14 +11,28 @@ const apiKey = process.env.GEN_AI_API_KEY;
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
+function fileToGenerativePart(base64, mimeType) {
+    return {
+      inlineData: {
+        data: base64,
+        mimeType
+      },
+    };
+  }
+
 genAIRoute.post("/text2text", async (req,res)=>{
     try {
-        console.log(req.body, "req . body")
+        // console.log(req.body, "req . body")
         const userId = req.query.userId;
         const prompt = req.body.prompt;
-        const modelName = "gemini-pro"
+        const file = req.body.file;
+        console.log(file,'--file--');
+        
+        const modelName = file ? "gemini-pro-vision" : "gemini-pro"
+        console.log(modelName,'model name');
         const model = genAI.getGenerativeModel({model: modelName});
-        const result = await model.generateContent(prompt);
+        const input = file ? [prompt, fileToGenerativePart(file.base64,file.mimeType)] : prompt
+        const result = await model.generateContent(input);
         const response = result.response;
         console.log(response.text())
         const promptLog = new GenAI({prompt,response: response.text(), userId, modelName});
