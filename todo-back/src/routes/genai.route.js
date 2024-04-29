@@ -28,18 +28,18 @@ genAIRoute.post("/text2text", async (req,res)=>{
         const files = req.body.files;
         console.log(files,'--file--');
         
-        const modelName = files.length > 0 ? "gemini-pro-vision" : "gemini-pro"
+        const modelName = files && files.length > 0 ? "gemini-pro-vision" : "gemini-pro"
         console.log(modelName,'model name');
         const model = genAI.getGenerativeModel({model: modelName});
         const genParts = [];
-        for(let i = 0; i < files.length; i++){
+        for(let i = 0; i < files?.length; i++){
             genParts.push(fileToGenerativePart(files[i].base64, files[i].mimeType))
         }
-        const input = files.length > 0 ? [prompt, ...genParts] : prompt
+        const input = files && files.length > 0 ? [prompt, ...genParts] : prompt
         const result = await model.generateContent(input);
         const response = result.response;
         console.log(response.text())
-        const promptLog = new GenAI({prompt,response: response.text(), userId, modelName});
+        const promptLog = files && files.length > 0 ?new GenAI({prompt,response: response.text(), userId, modelName,files}) :new GenAI({prompt,response: response.text(), userId, modelName});
         await promptLog.save();
         res.send({response: response.text()})
     }catch(err){

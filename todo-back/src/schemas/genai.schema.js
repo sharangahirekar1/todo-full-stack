@@ -5,6 +5,7 @@ const genaiSchema = new mongoose.Schema({
     response: {type: String},
     modelName: {type: String},
     userId: {type: mongoose.Schema.Types.ObjectId},
+    files: [],
     created: {
         type: Date,
         default: Date.now,
