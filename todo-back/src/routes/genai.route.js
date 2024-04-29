@@ -25,13 +25,17 @@ genAIRoute.post("/text2text", async (req,res)=>{
         // console.log(req.body, "req . body")
         const userId = req.query.userId;
         const prompt = req.body.prompt;
-        const file = req.body.file;
-        console.log(file,'--file--');
+        const files = req.body.files;
+        console.log(files,'--file--');
         
-        const modelName = file ? "gemini-pro-vision" : "gemini-pro"
+        const modelName = files.length > 0 ? "gemini-pro-vision" : "gemini-pro"
         console.log(modelName,'model name');
         const model = genAI.getGenerativeModel({model: modelName});
-        const input = file ? [prompt, fileToGenerativePart(file.base64,file.mimeType)] : prompt
+        const genParts = [];
+        for(let i = 0; i < files.length; i++){
+            genParts.push(fileToGenerativePart(files[i].base64, files[i].mimeType))
+        }
+        const input = files.length > 0 ? [prompt, ...genParts] : prompt
         const result = await model.generateContent(input);
         const response = result.response;
         console.log(response.text())
@@ -42,6 +46,8 @@ genAIRoute.post("/text2text", async (req,res)=>{
         console.log("Error text2text ", err, err.message);
         if(err.message.includes("Text not available. Response was blocked due to OTHER")) {
             res.send({response: null, error: "Text not available. Response was blocked due to OTHER"});
+        }else if(err.message.includes("fetch failed")){
+            res.send({response: null, error: "fetch failed"})
         }
     }
 })
