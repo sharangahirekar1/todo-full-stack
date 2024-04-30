@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {userTypes} from './types';
 
+// const url = "http://localhost:8111"
+const url = "https://todo-full-stack-0wlj.onrender.com"
 
 const userLoginRequest = ()=>{
     return {
@@ -54,7 +56,7 @@ const signupApi = (data)=>(dispatch)=>{
 
     return axios({
         method:"POST",
-        url:"http://localhost:8111/users/signup",
+        url:url + "/users/signup",
         data: JSON.stringify(data),
         headers:{
             "Content-Type":"application/json"
@@ -69,7 +71,7 @@ const loginApi = (data)=>(dispatch)=>{
 
     return axios({
         method:"POST",
-        url:"http://localhost:8111/users/login",
+        url:url + "/users/login",
         data: JSON.stringify(data),
         headers:{
             "Content-Type":"application/json"

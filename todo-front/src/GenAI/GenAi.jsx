@@ -68,18 +68,12 @@ const GenAi = () => {
         </Fab>
         <input type='file' multiple='multiple' onChange={async (ev)=>{
             const files = ev.target.files;
-            console.log(files,'files from Input tag upload');
             const base64Arr = [];
             for(let i = 0; i < files.length; i++){
                 const file = files[i];
                 const base64 = await toBase64(file);
                 base64Arr.push({base64: base64.slice(23), mimeType: file.type})
             }
-                
-
-            console.log(base64Arr, 'base64 files and format')
-            // const file = files[0];
-            // const base64 = await toBase64(file);
             setPromptData({...promptData, files: base64Arr});
         }}/>
     </Box>,
