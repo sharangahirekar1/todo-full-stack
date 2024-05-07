@@ -45,7 +45,7 @@ genAIRoute.post("/text2text", async (req,res)=>{
     }catch(err){
         console.log("Error text2text ", err, err.message);
         if(err.message.includes("Text not available. Response was blocked due to OTHER")) {
-            res.send({response: null, error: "Text not available. Response was blocked due to OTHER"});
+            res.send({response: null, error: "Text not available. Response was blocked due to OTHER[Explicit content ]"});
         }else if(err.message.includes("fetch failed")){
             res.send({response: null, error: "fetch failed"})
         }
