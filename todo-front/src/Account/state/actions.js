@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {userTypes} from './types';
 
-// const url = "http://localhost:8111"
-const url = "https://todo-full-stack-0wlj.onrender.com"
+const url = "http://localhost:8111"
+// const url = "https://todo-full-stack-0wlj.onrender.com"
 
 const userLoginRequest = ()=>{
     return {
