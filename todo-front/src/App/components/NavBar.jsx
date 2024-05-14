@@ -137,7 +137,7 @@ const NavBar = ()=>{
                         <Box sx={{flexGrow:0}} >
                             <Tooltip title="Account ">
                                 <IconButton onClick={handleOpenUserMenu}>
-                                    <Avatar alt="Name photo pic"/>
+                                    <Avatar alt="Name photo pic" src=''/>
                                 </IconButton>
                             </Tooltip>
                             <Menu sx={{mt:'45px'}}
