@@ -36,6 +36,7 @@ controls.signup = async (req,res) => {
 }
 
 controls.login = async (req,res) => {
+    console.log(req.cookie, 'cookie parssed')
     const userdata = req.body
     console.log(userdata, 'login userdata');
     const hash = createHash(userdata.password, salt);
@@ -44,6 +45,7 @@ controls.login = async (req,res) => {
     const user = await User.find({email:userdata.email, hash});
     console.log(user,' user login')
     if(user.length === 1){
+        res.append("Set-Cookie",`user=${user[0].username}; userId=${user[0]._id}; Path=/; Secure; HTTPOnly;`)
         res.send({username:user[0].username, userId: user[0]._id})
     }else res.send("User doesn't exist");
 }

@@ -22,6 +22,7 @@ userRoute.get("/:id",async(req,res)=>{
 userRoute.post("/login",async(req,res)=>{
     try{
         await userControls.login(req,res);
+
     }
     catch(err){
         console.log(err, 'login error');
