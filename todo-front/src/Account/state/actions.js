@@ -74,7 +74,8 @@ const loginApi = (data)=>(dispatch)=>{
         url:url + "/users/login",
         data: JSON.stringify(data),
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "Cookie":document.cookie
         }
     }).then((res)=>dispatch(userLoginSuccess(res))).catch((err)=>dispatch(userLoginError(err)))
 }

@@ -17,6 +17,8 @@ const Login = ()=>{
     const dispatch = useDispatch()
     const res = useSelector((state)=>state.user.login);
     console.log(res,' login use selector data');
+    console.log("Document cookie", document.cookie)
+    
     const handleChange = (ev)=>{
         if(ev.key === "Enter"){
             setTimeout(()=>{
