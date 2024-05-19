@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({children}) => {
-    const res = useSelector((state)=>state.user.login);
+    let res = useSelector((state)=>state.user.login);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!res) res = user
 
     if(res && res.username && res.userId) {
         return (

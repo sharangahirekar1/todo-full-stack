@@ -27,7 +27,9 @@ const NavBar = ()=>{
     }
     const handleCloseUserMenu = (s)=>{
         if(s === "Logout") {
+            localStorage.removeItem("user")
             dispatch({type: userTypes.USER_LOGOUT});
+            
         }
         setAnchorElUser(null);
     }
