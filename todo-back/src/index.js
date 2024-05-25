@@ -33,6 +33,19 @@ app.post("/contact-form",async (req,res)=>{
         console.log(err,"error post data")
     }
 })
+app.get("/contact-form",async (req,res)=>{
+    try {
+        const password = req.query.oq;
+        if (password == "some_gibberish_text_5grty_1@3") {
+            const contacts = await Contact.find({})
+            res.send({msg:"Your contact forms", data: contacts})
+        }else {
+            res.send({msg:"Not allowed"})
+        }
+    } catch(err){
+        console.log("error get contact form",err);
+    }
+})
 app.get("/debug-sentry", function mainHandler(req, res) {
     throw new Error("My first Sentry error!");
   });
