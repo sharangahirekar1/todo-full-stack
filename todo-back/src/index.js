@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const Sentry = require("@sentry/node");
+const Contact = require("./schemas/contact.schema");
 dotenv.config();
 
 const connStr = process.env.MONGODB_CONNECTION_STR;
@@ -23,6 +24,15 @@ app.use(cors())
 app.use("/todos",todoSlice);
 app.use("/users",userSlice);
 app.use("/genai",genaiSlice);
+app.post("/contact-form",async (req,res)=>{
+    try {
+        const contact = new Contact(req.body);
+        await contact.save();
+        res.send({msg:"Saved Successfully", data: contact});
+    } catch(err) {
+        console.log(err,"error post data")
+    }
+})
 app.get("/debug-sentry", function mainHandler(req, res) {
     throw new Error("My first Sentry error!");
   });
