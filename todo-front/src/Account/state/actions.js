@@ -4,6 +4,11 @@ import {userTypes} from './types';
 const url = "http://localhost:8111"
 // const url = "https://todo-full-stack-0wlj.onrender.com"
 
+const user = JSON.parse(localStorage.getItem("user"));
+const token = user && user.token;
+
+console.log("user ", user, token);
+
 const userLoginRequest = ()=>{
     return {
         type: userTypes.USER_LOGIN_REQUEST
@@ -53,13 +58,14 @@ const userSignupError = (error)=>{
 
 const signupApi = (data)=>(dispatch)=>{
     dispatch(userSignupRequest());
-
+    console.log(token, 'token')
     return axios({
         method:"POST",
         url:url + "/users/signup",
         data: JSON.stringify(data),
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "authorization": `Bearer ${token}`
         }
     }).then((res)=>{
         dispatch(userSignupSuccess(res));

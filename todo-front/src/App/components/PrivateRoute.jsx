@@ -9,7 +9,7 @@ const PrivateRoute = ({children}) => {
 
     if (!res) res = user
 
-    if(res && res.username && res.userId) {
+    if(res && res.token ) {
         return (
             <div>
               {children}

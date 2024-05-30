@@ -37,7 +37,7 @@ const Login = ()=>{
         dispatch(userActions.loginApi(login));
     }
     React.useEffect(()=>{
-        if(res && typeof res === "object" && res.username){
+        if(res && res.msg === "Login Success"){
             localStorage.setItem("user", JSON.stringify(res));
             navigate("/");
         }

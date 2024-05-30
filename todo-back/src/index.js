@@ -1,4 +1,4 @@
-require("./instrument");
+// require("./instrument");
 const express = require("express");
 const mongoose = require("mongoose");
 const todoSlice = require("./routes/todo.route");
@@ -10,6 +10,7 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const Sentry = require("@sentry/node");
 const Contact = require("./schemas/contact.schema");
+const auth = require("./middlewares/auth");
 dotenv.config();
 
 const connStr = process.env.MONGODB_CONNECTION_STR;
@@ -20,6 +21,8 @@ app.use(morgan("combined"));
 app.use(cookieParser());
 app.use(express.json({limit: '50mb'})) // if not validation will fail
 app.use(cors())
+
+app.use(auth);
 
 app.use("/todos",todoSlice);
 app.use("/users",userSlice);
@@ -46,14 +49,14 @@ app.get("/contact-form",async (req,res)=>{
         console.log("error get contact form",err);
     }
 })
-app.get("/debug-sentry", function mainHandler(req, res) {
-    throw new Error("My first Sentry error!");
-  });
-Sentry.setupExpressErrorHandler(app)
-app.use(function onError(err, req,res, next){
-    res.statusCode = 500;
-    res.end(res.sentry + "\n");
-})
+// app.get("/debug-sentry", function mainHandler(req, res) {
+//     throw new Error("My first Sentry error!");
+//   });
+// Sentry.setupExpressErrorHandler(app)
+// app.use(function onError(err, req,res, next){
+//     res.statusCode = 500;
+//     res.end(res.sentry + "\n");
+// })
 
 app.listen(8111,async()=>{
     await mongoose.connect(connStr);

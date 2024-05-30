@@ -1,7 +1,11 @@
 const express = require("express");
 const userControls = require("./../controllers/users");
+const jwt = require("jsonwebtoken");
 
 const User = require("../schemas/user.schema");
+
+const token_Secret = process.env.jwt_token_secret;
+const refresh_token_secret = process.env.jwt_refresh_token_secret ;
 
 const userRoute = express.Router();
 userRoute.use(express.json());
@@ -60,5 +64,15 @@ userRoute.patch("/:id",async(req,res)=>{
         res.sendStatus(202);
     }catch(err){console.log(err);res.sendStatus(401)}
 })   // change password or edit profile
+
+userRoute.get("/refresh", async (req,res)=>{
+    const refreshToken = req.headers["authorization"].split(" ")[1];
+    const valid = jwt.verify(refreshToken, jwt_refresh_token_secret);
+    if(valid) {
+        const decode = jwt.decode(refreshToken, {complete: true})
+        const token = jwt.sign(decode, jwt_token_secret, {expiresIn: "1 hour"})
+        res.send({msg: "Primary token", token})
+    }
+})
 
 module.exports = userRoute;

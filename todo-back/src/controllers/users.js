@@ -1,5 +1,9 @@
 const User = require("../schemas/user.schema");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+
+const token_Secret = "alert123";
+const refresh_token_secret = "alert321";
 
 const createHash = (password, salt) => {
     const hash = crypto.createHmac('sha512', salt);
@@ -45,8 +49,10 @@ controls.login = async (req,res) => {
     const user = await User.find({email:userdata.email, hash});
     console.log(user,' user login')
     if(user.length === 1){
+        const token = jwt.sign({id:user[0]._id, username:user[0].username},token_Secret,{expiresIn:"30 min"})
+        const refresh_token = jwt.sign({id:user[0]._id, username:user[0].username}, refresh_token_secret, {expiresIn: "7 days"})
         res.append("Set-Cookie",`user=${user[0].username}; userId=${user[0]._id}; Path=/; Secure; HTTPOnly;`)
-        res.send({username:user[0].username, userId: user[0]._id})
+        res.send({msg: "Login Success", token,refresh_token})
     }else res.send("User doesn't exist");
 }
 

@@ -3,6 +3,10 @@ import {todoTypes} from './types';
 
 const url = "http://localhost:8111"
 // const url = "https://todo-full-stack-0wlj.onrender.com"
+const user = JSON.parse(localStorage.getItem("user"));
+const token = user && user.token;
+
+console.log("Token value in todo actions", token, user);
 
 //---------------------- action creators -----------------------------
 
@@ -66,12 +70,15 @@ const todoPatchError = (err)=>{
 
 //---------------------- actual actions ------------------------------
 
-const getData = (userId)=>(dispatch)=>{
+const getData = (token)=>(dispatch)=>{
     dispatch(todoRequest());
 
     return axios({
         method:'GET',
-        url:url + "/todos?userId="+ userId,
+        url:url + "/todos",
+        headers: {
+            "authorization": "Bearer "+token
+        }
     }).then((res)=>dispatch(todoGetSuccess(res.data))).catch((err)=>dispatch(todoGetError(err)))
 }
 
@@ -83,7 +90,8 @@ const postData = (data)=>(dispatch)=>{
         url:url + "/todos",
         data:JSON.stringify(data),
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "authorization": "Bearer "+token
         }
     }).then((res)=>dispatch(todoPostSuccess(res.data))).catch((err)=>dispatch(todoPostError(err)))
 }
@@ -95,6 +103,9 @@ const deleteData = (id)=>(dispatch)=>{
         return axios({
             method:'DELETE',
             url:url + '/todos/'+id,
+            headers: {
+                "authorization": "Bearer "+token
+            }
         }).then((res)=>dispatch(todoDeleteSuccess(id))).catch((err)=>dispatch(todoDeleteError(err)))
     }catch(err){console.log(err)}
 }
@@ -107,7 +118,8 @@ const patchData = (id,body)=>(dispatch)=>{
         url:url + '/todos/'+id,
         data:JSON.stringify(body),
         headers:{
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            "authorization": "Bearer "+token
         }
     }).then((res)=>{dispatch(todoPatchSuccess(id))}).catch((err)=>dispatch(todoPatchError(err)))
 }
