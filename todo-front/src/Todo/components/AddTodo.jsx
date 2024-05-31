@@ -19,7 +19,7 @@ const AddTodo = (props)=>{
     }
     const handleSubmit = ()=>{
         setSnackbar({open: true, msg: "Added Todo"});
-        todo.userId = user.userId;
+        // todo.userId = user.userId;
         dispatch(todosActions.postData(todo))
     }
 

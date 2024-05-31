@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const Sentry = require("@sentry/node");
 const Contact = require("./schemas/contact.schema");
 const auth = require("./middlewares/auth");
+const blogSlice = require("./routes/blog.route");
 dotenv.config();
 
 const connStr = process.env.MONGODB_CONNECTION_STR;
@@ -27,6 +28,7 @@ app.use(auth);
 app.use("/todos",todoSlice);
 app.use("/users",userSlice);
 app.use("/genai",genaiSlice);
+app.use("/blog", blogSlice);
 app.post("/contact-form",async (req,res)=>{
     try {
         const contact = new Contact(req.body);
