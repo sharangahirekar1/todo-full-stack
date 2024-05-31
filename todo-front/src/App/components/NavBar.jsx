@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userTypes } from '../../Account/state/types';
 
-const pages = ['Todo','Blog','GenAI'];
+const pages = ['Todo','Blog','GenAI',"CSV to JSON"];
 const setting = ['Profile','Account','Dashboard','Logout'];
 
 const NavBar = ()=>{
@@ -42,6 +42,10 @@ const NavBar = ()=>{
             }
             case 'GenAI': {
                 navigate("/gen-ai");
+                break;
+            }
+            case "CSV to JSON": {
+                navigate("/csv2json");
                 break;
             }
             default: {
@@ -124,6 +128,10 @@ const NavBar = ()=>{
                                         }
                                         case 'GenAI': {
                                             navigate("/gen-ai");
+                                            break;
+                                        }
+                                        case "CSV to JSON": {
+                                            navigate("/csv2json");
                                             break;
                                         }
                                         default: {}

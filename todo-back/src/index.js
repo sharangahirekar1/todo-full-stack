@@ -12,6 +12,7 @@ const Sentry = require("@sentry/node");
 const Contact = require("./schemas/contact.schema");
 const auth = require("./middlewares/auth");
 const blogSlice = require("./routes/blog.route");
+const converterSlice = require("./routes/converter.route");
 dotenv.config();
 
 const connStr = process.env.MONGODB_CONNECTION_STR;
@@ -35,6 +36,7 @@ app.use("/todos",todoSlice);
 app.use("/users",userSlice);
 app.use("/genai",genaiSlice);
 app.use("/blog", blogSlice);
+app.use("/converter", converterSlice)
 app.post("/contact-form",async (req,res)=>{
     try {
         const contact = new Contact(req.body);

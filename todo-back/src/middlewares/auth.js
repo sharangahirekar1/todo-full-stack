@@ -9,7 +9,7 @@ const refresh_token_secret = process.env.jwt_refresh_token_secret ;
 
 const auth = (req,res,next)=>{
     try{
-        if (req.url.includes("signup") || req.url.includes("login")) next()
+        if (req.url.includes("signup") || req.url.includes("login") || req.url.includes("converter")) next()
         const token = req.headers["authorization"] && req.headers["authorization"].split(" ")[1];
         if(token){
             const valid = jwt.verify(token,token_Secret);

@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from '../Account/components/ForgotPassword';
 import GenAi from '../GenAI/GenAi';
 import Todo from '../Todo/Todo';
+import ConverterCSVJSON from '../csv2json/csv2json';
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/blog" element={<Blog/>}/>
+        <Route path="/csv2json" element={<ConverterCSVJSON/>}/>
       </Routes>
       </div>
     </div>

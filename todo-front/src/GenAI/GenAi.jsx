@@ -16,10 +16,11 @@ const GenAi = () => {
         setLoading(true);
         const res = await axios({
             method: "POST",
-            url: "http://localhost:8111/genai/text2text?" + "userId=" + user.userId,
+            url: "http://localhost:8111/genai/text2text",
             data: promptData,
             headers: {
-                "Content-type": 'application/json'
+                "Content-type": 'application/json',
+                "authorization": `Bearer ${user.token}`
             }
         })
         return res.data;
