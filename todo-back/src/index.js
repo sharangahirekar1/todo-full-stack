@@ -18,6 +18,12 @@ const connStr = process.env.MONGODB_CONNECTION_STR;
 console.log(connStr, 'connection string');
 const app = express();
 
+const NODE_ENV = process.env.NODE_ENV;
+
+if (NODE_ENV == "production"){
+    require("./../mongo_backup");
+}
+
 app.use(morgan("combined"));
 app.use(cookieParser());
 app.use(express.json({limit: '50mb'})) // if not validation will fail
