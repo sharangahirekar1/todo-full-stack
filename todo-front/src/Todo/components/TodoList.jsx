@@ -11,6 +11,7 @@ import { SnackBarContext } from '../../Common/Contexts/Snackbar';
 const TodoList = (props)=>{
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
     let list =  useSelector((state)=>state.todo.todo);
+    console.log(list, 'list')
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector((state)=>state.todo.isLoading);
@@ -37,7 +38,7 @@ const TodoList = (props)=>{
         <Box>
             {loading && <LinearProgress/>}
             {!loading && <List>
-                {list.map((t)=><ListItem key={t._id}>
+                {list && Array.isArray(list) && list.map((t)=><ListItem key={t._id}>
                     <Button key={t._id} onClick={()=>handleDelete(t._id)}>
                         <DeleteOutlineIcon/>
                     </Button>

@@ -10,6 +10,18 @@ const refresh_token_secret = process.env.jwt_refresh_token_secret ;
 const userRoute = express.Router();
 userRoute.use(express.json());
 
+
+userRoute.get("/refresh", async (req,res)=>{
+    const refreshToken = req.headers["authorization"].split(" ")[1];
+    console.log(refresh_token_secret,'refresh secret');
+    const valid = jwt.verify(refreshToken, refresh_token_secret);
+    if(valid) {
+        const decode = jwt.decode(refreshToken, {complete: true})
+        const token = jwt.sign(decode, token_Secret, {expiresIn: "1 hour"})
+        res.send({msg: "Primary token", token})
+    }
+})
+
 userRoute.get("/",async(req,res)=>{
     const {first_name,last_name} = req.query;
     const users = await User.find({first_name:first_name,last_name:last_name},'_id email');
@@ -30,7 +42,7 @@ userRoute.post("/login",async(req,res)=>{
     }
     catch(err){
         console.log(err, 'login error');
-        res.sendStatus(401)
+        // res.sendStatus(401)
     }
 })
 
@@ -49,30 +61,21 @@ userRoute.post("/signup",async(req,res)=>{
         await userControls.signup(req,res);
     }catch(err){
         console.log(err,'error ');
-        res.sendStatus(401);
+        // res.sendStatus(401);
     }
 })   // sign up
 userRoute.delete("/:id",async(req,res)=>{
     try {
         await User.findByIdAndDelete(req.params.id);
         res.sendStatus(204);
-    }catch(err){console.log(err);res.sendStatus(401)}
+    }catch(err){console.log(err)}
 })  // close user account
 userRoute.patch("/:id",async(req,res)=>{
     try {
         await User.findByIdAndUpdate(req.params.id,req.body);
         res.sendStatus(202);
-    }catch(err){console.log(err);res.sendStatus(401)}
+    }catch(err){console.log(err);}
 })   // change password or edit profile
 
-userRoute.get("/refresh", async (req,res)=>{
-    const refreshToken = req.headers["authorization"].split(" ")[1];
-    const valid = jwt.verify(refreshToken, jwt_refresh_token_secret);
-    if(valid) {
-        const decode = jwt.decode(refreshToken, {complete: true})
-        const token = jwt.sign(decode, jwt_token_secret, {expiresIn: "1 hour"})
-        res.send({msg: "Primary token", token})
-    }
-})
 
 module.exports = userRoute;

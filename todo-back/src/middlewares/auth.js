@@ -9,7 +9,11 @@ const refresh_token_secret = process.env.jwt_refresh_token_secret ;
 
 const auth = (req,res,next)=>{
     try{
-        if (req.url.includes("signup") || req.url.includes("login") || req.url.includes("converter")) next()
+        console.log(req.url,'req url', req.url.includes("users") || req.url.includes("converter"))
+        if (req.url.includes("users") || req.url.includes("converter")){
+            next()
+            return
+        }
         const token = req.headers["authorization"] && req.headers["authorization"].split(" ")[1];
         if(token){
             const valid = jwt.verify(token,token_Secret);
@@ -21,7 +25,8 @@ const auth = (req,res,next)=>{
         }
         else throw Error("Authorization error")
     }catch(err){
-        console.log("Auth middleware error",err);
+        console.log("Auth middleware error",err,req.url);
+        res.send({msg:"Token expired error"})
     }
 }
 
