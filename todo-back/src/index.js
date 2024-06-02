@@ -22,7 +22,7 @@ const app = express();
 const NODE_ENV = process.env.NODE_ENV;
 
 if (NODE_ENV == "production"){
-    require("./../mongo_backup");
+    // require("./../mongo_backup");
 }
 
 app.use(morgan("combined"));
