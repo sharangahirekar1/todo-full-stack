@@ -7,10 +7,11 @@ const token_Secret = process.env.jwt_token_secret;
 const refresh_token_secret = process.env.jwt_refresh_token_secret ;
 
 
+
 const auth = (req,res,next)=>{
     try{
         console.log(req.url,'req url', req.url.includes("users") || req.url.includes("converter"))
-        if (req.url.includes("users") || req.url.includes("converter")){
+        if (req.url.includes("users") || req.url.includes("converter") || req.url == "/"){
             next()
             return
         }

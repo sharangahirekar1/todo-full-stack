@@ -5,10 +5,11 @@ const path = require('path');
 dotenv.config();
 
 const db = process.env.MONGODB_NAME;
+const mongo_uri = process.env.MONGODB_CONNECTION_STR;
 const ARCHIVE_PATH = path.join(__dirname, `${db}.gzip`);
 
 function backUpMongoDb(){
-    const child = spawn("mongodump", [`--db=${db}`, `--archive=${ARCHIVE_PATH}`, `--gzip`])
+    const child = spawn("mongodump", [`--db=${db}`,`--uri=${mongo_uri}`, `--archive=${ARCHIVE_PATH}`, `--gzip`])
 
     child.stdout.on("data", (data)=>{
         console.log("stdout:\n",data);
