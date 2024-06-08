@@ -16,7 +16,6 @@ const converterSlice = require("./routes/converter.route");
 dotenv.config();
 
 const connStr = process.env.MONGODB_CONNECTION_STR;
-console.log(connStr, 'connection string');
 const app = express();
 
 const NODE_ENV = process.env.NODE_ENV;
