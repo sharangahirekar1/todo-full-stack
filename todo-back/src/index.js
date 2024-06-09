@@ -1,4 +1,4 @@
-// require("./instrument");
+
 const express = require("express");
 const mongoose = require("mongoose");
 const todoSlice = require("./routes/todo.route");
@@ -21,6 +21,7 @@ const app = express();
 const NODE_ENV = process.env.NODE_ENV;
 
 if (NODE_ENV == "production"){
+    require("./instrument");
     require("./../mongo_backup");
 }
 
@@ -58,14 +59,16 @@ app.get("/contact-form",async (req,res)=>{
         console.log("error get contact form",err);
     }
 })
-// app.get("/debug-sentry", function mainHandler(req, res) {
-//     throw new Error("My first Sentry error!");
-//   });
-// Sentry.setupExpressErrorHandler(app)
-// app.use(function onError(err, req,res, next){
-//     res.statusCode = 500;
-//     res.end(res.sentry + "\n");
-// })
+if (NODE_ENV == "production"){
+    app.get("/debug-sentry", function mainHandler(req, res) {
+        throw new Error("My first Sentry error!");
+      });
+    Sentry.setupExpressErrorHandler(app)
+    app.use(function onError(err, req,res, next){
+        res.statusCode = 500;
+        res.end(res.sentry + "\n");
+    })
+}
 
 app.listen(8111,async()=>{
     await mongoose.connect(connStr);
