@@ -18,9 +18,15 @@ const AddTodo = (props)=>{
         setTodo({...todo,isCompleted:false,[name]:value});
     }
     const handleSubmit = ()=>{
-        setSnackbar({open: true, msg: "Added Todo"});
-        // todo.userId = user.userId;
-        dispatch(todosActions.postData(todo))
+        try {
+            // todo.userId = user.userId;
+            const user = JSON.parse(localStorage.getItem("user"));
+            dispatch(todosActions.postData(todo,user.token));
+            setSnackbar({open: true, msg: "Added Todo"});
+        }
+        catch(err){
+            setSnackbar({open: true, msg: "Error in adding todo"});
+        }
     }
 
     return (

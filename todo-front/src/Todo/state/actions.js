@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {todoTypes} from './types';
 
-const url = "http://localhost:8111"
-// const url = "https://todo-full-stack-0wlj.onrender.com"
+// const url = "http://localhost:8111"
+const url = "https://todo-full-stack-0wlj.onrender.com"
 const user = JSON.parse(localStorage.getItem("user"));
 const token = user && user.token;
 
@@ -115,7 +115,7 @@ const getData = (token)=>(dispatch)=>{
     }).then((res)=>dispatch(todoGetSuccess(res.data))).catch((err)=>dispatch(todoGetError(err)))
 }
 
-const postData = (data)=>(dispatch)=>{
+const postData = (data,token)=>(dispatch)=>{
     dispatch(todoRequest());
 
     return axios({
@@ -124,9 +124,9 @@ const postData = (data)=>(dispatch)=>{
         data:JSON.stringify(data),
         headers:{
             "Content-Type":"application/json",
-            "authorization": "Bearer "+token
+            "authorization": "Bearer "+ token
         }
-    }).then((res)=>dispatch(todoPostSuccess(res.data))).catch((err)=>dispatch(todoPostError(err)))
+    }).then((res)=>dispatch(todoPostSuccess(res.data))).catch((err)=>{dispatch(todoPostError(err)); console.log(err)})
 }
 
 const deleteData = (id)=>(dispatch)=>{
