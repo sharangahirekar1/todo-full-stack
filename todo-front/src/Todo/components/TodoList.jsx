@@ -14,6 +14,10 @@ const TodoList = (props)=>{
     console.log(list, 'list')
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    if( list && list.msg && list.msg == "Token expired error") {
+        localStorage.removeItem("user")
+        navigate("/login");
+    }
     const loading = useSelector((state)=>state.todo.isLoading);
     const { open, msg} = snackbar;
     const handleOpenSnackbar = (msg) => {

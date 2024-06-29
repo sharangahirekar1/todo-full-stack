@@ -6,6 +6,9 @@ import axios from 'axios';
 import {marked} from 'marked';
 import { SnackBarContext } from '../Common/Contexts/Snackbar';
 
+const url = "http://localhost:8111";
+// const url = "https://todo-full-stack-0wlj.onrender.com";
+
 const GenAi = () => {
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
     const [promptData, setPromptData] = useState({prompt: "", file: null});
@@ -16,7 +19,7 @@ const GenAi = () => {
         setLoading(true);
         const res = await axios({
             method: "POST",
-            url: "http://localhost:8111/genai/text2text",
+            url: url + "/genai/text2text",
             data: promptData,
             headers: {
                 "Content-type": 'application/json',
