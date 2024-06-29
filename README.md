@@ -8,7 +8,7 @@
 - https://todo-front-topaz.vercel.app/ (serving)
 
 ### Login id DEMO
- use violetfumes@email.com and violetfumes as password, or you could also create a new id by clicking on
+ use greengarnish@email.com and greengarnish as password, or you could also create a new id by clicking on
  Create an account
 
 ## Features
