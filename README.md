@@ -1,7 +1,7 @@
 ## TODO-FULL-STACK APPLICATION
 ![](https://img.shields.io/github/forks/sharangahirekar1/todo-full-stack)
 #### Server Apis (Mongo + Express)
-- Server side deployed on Heroku
+- Server side deployed on Render
 - https://todo-full-stack-0wlj.onrender.com/ (serving)
 #### Client Side (React)
 - Deployed on vercel

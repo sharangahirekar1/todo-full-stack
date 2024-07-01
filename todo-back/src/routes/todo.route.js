@@ -20,7 +20,8 @@ todoRoute.get("/:id",async(req,res)=>{
     res.send(todo);
 });
 todoRoute.post("/",async(req,res)=>{
-    const todo = new Todo(req.body);
+    let userId = req.user.id;
+    const todo = new Todo({...req.body, userId});
     try{
         await todo.save();
         res.send(todo);
