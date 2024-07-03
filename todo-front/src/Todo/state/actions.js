@@ -6,7 +6,7 @@ const url = "https://todo-full-stack-0wlj.onrender.com"
 const user = JSON.parse(localStorage.getItem("user"));
 const token = user && user.token;
 
-console.log("Token value in todo actions", token, user);
+// console.log("Token value in todo actions", token, user);
 
 
 async function refresh(){
@@ -19,9 +19,9 @@ async function refresh(){
         }
     })
 
-    console.log("refresh response : ",res.data)
+    // console.log("refresh response : ",res.data)
     user.token = res.data.token
-    console.log("USER",user);
+    // console.log("USER",user);
     localStorage.setItem("user",JSON.stringify(user))
 }
 
@@ -29,7 +29,7 @@ async function refresh(){
 axios.interceptors.response.use(async function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("response from interceptor : ",response);
+    // console.log("response from interceptor : ",response);
     const res = response.data;
     const url = response.request.responseURL
     if(res.msg === "Token expired error" && url.includes("refresh") && user.refresh_token) {

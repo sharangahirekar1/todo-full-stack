@@ -7,7 +7,7 @@ const OneTodo = ()=>{
     const {id} = useParams();
     const list = useSelector((state)=>state.todo.todo);
     const todo = list.find((t)=>t._id === id);
-    console.log("todo" + " : ", todo);
+    // console.log("todo" + " : ", todo);
     return (
         <div>
             <div style={{

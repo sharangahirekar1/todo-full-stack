@@ -16,8 +16,8 @@ const Login = ()=>{
     const loading = useSelector((state)=>state.user.isLoading);
     const dispatch = useDispatch()
     const res = useSelector((state)=>state.user.login);
-    console.log(res,' login use selector data');
-    console.log("Document cookie", document.cookie)
+    // console.log(res,' login use selector data');
+    // console.log("Document cookie", document.cookie)
     
     const handleChange = (ev)=>{
         if(ev.key === "Enter"){

@@ -11,7 +11,7 @@ import { SnackBarContext } from '../../Common/Contexts/Snackbar';
 const TodoList = (props)=>{
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
     let list =  useSelector((state)=>state.todo.todo);
-    console.log(list, 'list')
+    // console.log(list, 'list')
     const dispatch = useDispatch();
     const navigate = useNavigate();
     if( list && list.msg && list.msg == "Token expired error") {
