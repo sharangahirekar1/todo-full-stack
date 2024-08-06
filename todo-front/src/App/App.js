@@ -22,7 +22,7 @@ function App() {
       width: '100%'
     }}>
       <NavBar/>
-      <div style={{
+      <main style={{
         paddingTop:"100px",
         height:"84vh",
         widht: "100%"
@@ -37,7 +37,7 @@ function App() {
         <Route path="/blog" element={<Blog/>}/>
         <Route path="/csv2json" element={<ConverterCSVJSON/>}/>
       </Routes>
-      </div>
+      </main>
     </div>
   );
 }

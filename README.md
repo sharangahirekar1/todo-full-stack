@@ -19,3 +19,8 @@
 - user can create their own account
 - Genai text as well as image prompts (Gemini apis)
 
+## TODO
+- Blog feature
+- Editing todo after creating
+- login bug fixing
+

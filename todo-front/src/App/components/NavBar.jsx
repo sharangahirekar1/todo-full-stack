@@ -55,7 +55,7 @@ const NavBar = ()=>{
     }
     return (
         <div>
-            <AppBar>
+            <AppBar role='banner'>
                 <Container>
                     <Toolbar>
                         <AdbIcon sx={{display:{xs:'none',md:'flex'},mr:1}}/>
