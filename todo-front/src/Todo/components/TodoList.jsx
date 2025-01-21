@@ -37,7 +37,7 @@ const TodoList = (props)=>{
     React.useEffect(()=>{
         const user = JSON.parse(localStorage.getItem("user"));
         dispatch(todosActions.getData(user.token));
-    },[dispatch])
+    },[])
     return (
         <Box>
             {loading && <LinearProgress/>}

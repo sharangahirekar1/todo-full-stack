@@ -5,9 +5,25 @@ import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
 import {marked} from 'marked';
 import { SnackBarContext } from '../Common/Contexts/Snackbar';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 // const url = "http://localhost:8111";
 const url = "https://todo-full-stack-0wlj.onrender.com";
+
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
 const GenAi = () => {
     const {snackbar, setSnackbar} = useContext(SnackBarContext);
@@ -54,6 +70,16 @@ const GenAi = () => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = reject;
     });
+    const uploadFileFunc = async (ev)=>{
+        const files = ev.target.files;
+        const base64Arr = [];
+        for(let i = 0; i < files.length; i++){
+            const file = files[i];
+            const base64 = await toBase64(file);
+            base64Arr.push({base64: base64.slice(23), mimeType: file.type})
+        }
+        setPromptData({...promptData, files: base64Arr});
+    }
   return [
     <Box sx={{
         display: {xs: "block",md: "flex"},
@@ -70,16 +96,20 @@ const GenAi = () => {
         }}>
             <AddIcon />
         </Fab>
-        <input type='file' multiple='multiple' onChange={async (ev)=>{
-            const files = ev.target.files;
-            const base64Arr = [];
-            for(let i = 0; i < files.length; i++){
-                const file = files[i];
-                const base64 = await toBase64(file);
-                base64Arr.push({base64: base64.slice(23), mimeType: file.type})
-            }
-            setPromptData({...promptData, files: base64Arr});
-        }}/>
+        <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+            >
+            Upload files
+            <VisuallyHiddenInput
+                type="file"
+                onChange={uploadFileFunc}
+                multiple
+            />
+        </Button>
     </Box>,
     <>
     {loading ?

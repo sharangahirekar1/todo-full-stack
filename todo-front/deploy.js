@@ -3,7 +3,7 @@ const fs = require("fs")
 const files = [
     {path:"/src/Todo/state/actions.js",developmentLine:3,productionLine:4},
     {path:"/src/Account/state/actions.js",developmentLine:3,productionLine:4},
-    {path:"/src/GenAI/GenAi.jsx",developmentLine:8,productionLine:9}
+    {path:"/src/GenAI/GenAi.jsx",developmentLine:11,productionLine:12} // 0 indexed
 ]
 
 

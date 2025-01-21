@@ -28,7 +28,7 @@ genAIRoute.post("/text2text", async (req,res)=>{
         const files = req.body.files;
         console.log(files,'--file--');
         
-        const modelName = files && files.length > 0 ? "gemini-pro-vision" : "gemini-pro"
+        const modelName = files && files.length > 0 ? "gemini-1.5-flash" : "gemini-pro"
         console.log(modelName,'model name');
         const model = genAI.getGenerativeModel({model: modelName});
         const genParts = [];
