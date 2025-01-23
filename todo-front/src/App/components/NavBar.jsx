@@ -4,10 +4,10 @@ import {Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, T
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useNavigate} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userTypes } from '../../Account/state/types';
 
-const pages = ['Todo','Blog','GenAI',"CSV to JSON"];
+const pages = ['Todo','Blog','Ask', 'Chat'];
 const setting = ['Profile','Account','Dashboard','Logout'];
 
 const NavBar = ()=>{
@@ -15,12 +15,14 @@ const NavBar = ()=>{
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { login } = useSelector(state=>state.user);
+    console.log(login, "from navbar");
 
     const handleOpenNavMenu = (e)=>{
-        setAnchorElNav(e.currentTarget);
+        if (login) setAnchorElNav(e.currentTarget);
     }
     const handleOpenUserMenu = (e)=>{
-        setAnchorElUser(e.currentTarget);
+        if(login) setAnchorElUser(e.currentTarget);
     }
     const handleCloseNavMenu = ()=>{
         setAnchorElNav(null);
@@ -40,8 +42,12 @@ const NavBar = ()=>{
                 navigate("/login");
                 break;
             }
-            case 'GenAI': {
+            case 'Ask': {
                 navigate("/gen-ai");
+                break;
+            }
+            case 'Chat': {
+                navigate("/chat");
                 break;
             }
             case "CSV to JSON": {
@@ -126,8 +132,12 @@ const NavBar = ()=>{
                                             navigate("/blog");
                                             break;
                                         }
-                                        case 'GenAI': {
+                                        case 'Ask': {
                                             navigate("/gen-ai");
+                                            break;
+                                        }
+                                        case 'Chat': {
+                                            navigate("/chat");
                                             break;
                                         }
                                         case "CSV to JSON": {

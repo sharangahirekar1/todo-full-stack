@@ -12,6 +12,7 @@ const Sentry = require("@sentry/node");
 const Contact = require("./schemas/contact.schema");
 const auth = require("./middlewares/auth");
 const blogSlice = require("./routes/blog.route");
+const chatSlice = require("./routes/chat.route");
 const converterSlice = require("./routes/converter.route");
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/todos",todoSlice);
 app.use("/users",userSlice);
 app.use("/genai",genaiSlice);
 app.use("/blog", blogSlice);
+app.use("/chat", chatSlice);
 app.use("/converter", converterSlice)
 app.post("/contact-form",async (req,res)=>{
     try {

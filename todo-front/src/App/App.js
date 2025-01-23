@@ -13,6 +13,7 @@ import ForgotPassword from '../Account/components/ForgotPassword';
 import GenAi from '../GenAI/GenAi';
 import Todo from '../Todo/Todo';
 import ConverterCSVJSON from '../csv2json/csv2json';
+import Chat from '../Chat/Chat';
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<PrivateRoute><Todo/></PrivateRoute>}/>
         <Route path="/:id" element={<PrivateRoute><OneTodo/></PrivateRoute>}/>
         <Route path="/gen-ai" element={<PrivateRoute><GenAi/></PrivateRoute>}/>
+        <Route path="/chat" element={<PrivateRoute><Chat/></PrivateRoute>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path="/signup" element={<Signup/>}/>
